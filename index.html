@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>DJ Claude — After Prom 2026</title>
+<title>DJ Claude</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -13,8 +13,7 @@
   --t:#d0d0ef;--td:rgba(255,255,255,.38);
 }
 body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden}
-/* Noise grain overlay */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
 .orb{font-family:'Orbitron',monospace!important}
 .screen{display:none;min-height:100vh;padding:20px;position:relative;z-index:1}
 .screen.active{display:flex;flex-direction:column}
@@ -22,18 +21,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .card{background:var(--surf);border:1px solid var(--bord);border-radius:14px;padding:24px;backdrop-filter:blur(8px)}
 .panel{background:var(--surf);border:1px solid var(--bord);border-radius:10px;padding:14px;position:relative}
 .ptitle{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,.28);text-transform:uppercase;margin-bottom:10px}
-/* Inputs */
 .inp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:var(--t);font-family:'Share Tech Mono',monospace;font-size:13px;padding:11px 14px;outline:none;width:100%;transition:border-color .2s}
 .inp:focus{border-color:rgba(0,245,255,.45);box-shadow:0 0 0 3px rgba(0,245,255,.07)}
 .inp::placeholder{color:rgba(255,255,255,.2)}
 .inp-sm{font-size:11px;padding:8px 11px}
-/* Buttons */
 .btn{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;border:none;border-radius:8px;cursor:pointer;padding:12px 18px;transition:all .15s;text-transform:uppercase}
 .btn:hover{filter:brightness(1.22);transform:scale(1.02)}
 .btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.32;cursor:not-allowed;transform:none!important;filter:none}
 .btn-pink{background:rgba(255,45,135,.2);color:var(--pink);border:1px solid rgba(255,45,135,.5);box-shadow:0 0 20px rgba(255,45,135,.12)}
-.btn-cyan{background:rgba(0,245,255,.12);color:var(--cyan);border:1px solid rgba(0,245,255,.38)}
-.btn-dim{background:rgba(255,255,255,.06);color:var(--td);border:1px solid rgba(255,255,255,.14)}
 .vbtn{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:.8px;border:none;border-radius:8px;cursor:pointer;padding:12px 6px;transition:all .15s;text-transform:uppercase;width:100%;line-height:1.5}
 .vbtn:hover{transform:scale(1.04);filter:brightness(1.25)}
 .vbtn:active{transform:scale(.96)}
@@ -45,105 +41,129 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .sm-btn{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.28);color:var(--cyan);border-radius:6px;cursor:pointer;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;padding:9px 12px;white-space:nowrap;transition:all .15s}
 .sm-btn:hover{background:rgba(0,245,255,.18)}
 .qitem{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.02);transition:all .2s}
-.qitem:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.qitem:hover{background:rgba(255,255,255,.05)}
 .edot{width:20px;height:20px;border-radius:50%;font-size:7px;font-family:'Orbitron',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .msg{padding:5px 9px;border-radius:5px;animation:fadeUp .3s ease}
 .vbar{background:linear-gradient(to top,var(--pink),var(--cyan));border-radius:2px 2px 0 0;flex:1;min-width:0}
 .logo{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;letter-spacing:6px;color:var(--pink);text-shadow:0 0 24px rgba(255,45,135,.55),0 0 48px rgba(255,45,135,.22)}
-.logo-sub{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3.5px;color:rgba(255,255,255,.26);margin-top:4px}
 .step-row{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .step-row:last-of-type{border-bottom:none}
 .badge{width:28px;height:28px;border-radius:50%;background:rgba(255,45,135,.18);border:1px solid rgba(255,45,135,.4);color:var(--pink);font-family:'Orbitron',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 a{color:var(--cyan);text-decoration:none}
 a:hover{text-decoration:underline}
-/* ── YT Stage: two stacked players, CSS crossfade ── */
+.pill{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px}
+.pill-dot{width:5px;height:5px;border-radius:50%}
+.dj-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;flex:1;margin-bottom:11px;min-height:0}
+/* Dual-player stage */
 #yt-stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;margin-bottom:11px}
 .yt-layer{position:absolute;inset:0;transition:opacity 8s ease}
 .yt-layer iframe,.yt-layer>div{width:100%!important;height:100%!important}
-/* Transition indicator strip */
 #tx-strip{height:3px;width:100%;background:rgba(255,255,255,.08);border-radius:0 0 8px 8px;overflow:hidden;position:absolute;bottom:0;left:0}
 #tx-fill{height:100%;width:0%;transition:width 1s linear;border-radius:0 0 8px 8px}
-/* Pump animation: pulsing ring on stage during transition */
 #stage-pulse{position:absolute;inset:0;border:3px solid var(--pink);border-radius:8px;opacity:0;pointer-events:none;transition:opacity .3s}
-/* Status pill */
-.pill{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px}
-.pill-dot{width:5px;height:5px;border-radius:50%}
-/* Animations */
+/* Hype window indicator — overlaid on stage */
+#hype-bar{position:absolute;bottom:3px;left:0;right:0;height:4px;pointer-events:none}
+#hype-range{position:absolute;height:100%;background:rgba(0,245,255,.35);border-radius:2px}
+#hype-head{position:absolute;width:3px;height:100%;background:var(--cyan);border-radius:2px;transition:left .8s linear;box-shadow:0 0 6px var(--cyan)}
+/* Window tooltip */
+#window-info{font-family:'Orbitron',monospace;font-size:8px;color:rgba(255,255,255,.32);letter-spacing:1px;margin-bottom:6px;text-align:right}
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes pumpRing{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.015);opacity:.3}}
 .pulse-anim{animation:pulse 1.4s ease-in-out infinite}
 .ring-anim{animation:pumpRing .46s ease-in-out infinite}
-/* DJ grid */
-.dj-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;flex:1;margin-bottom:11px;min-height:0}
-#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:rgba(15,5,30,.95);border:1px solid var(--pink);color:var(--pink);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1px;padding:10px 20px;border-radius:8px;display:none;z-index:999;backdrop-filter:blur(8px)}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:rgba(15,5,30,.95);border:1px solid var(--pink);color:var(--pink);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1px;padding:10px 20px;border-radius:8px;display:none;z-index:999}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════ SETUP ══════════════════ -->
+<!-- ══════════ SETUP ══════════ -->
 <div id="s-setup" class="screen active">
   <div style="text-align:center;margin-bottom:28px">
     <div class="logo">DJ CLAUDE</div>
-    <div class="logo-sub">AFTER PROM 2026 · ZERO-SILENCE ENGINE</div>
+    <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.26);margin-top:5px">AI DJ · ZERO SILENCE · HYPE CUTS ONLY</div>
   </div>
-  <div class="card" style="max-width:520px;width:100%">
-    <p style="font-size:12px;color:var(--td);line-height:1.85;margin-bottom:18px">
-      Two YouTube players run simultaneously — one playing, one pre-loading. Every transition is a live beat-pump crossfade. <strong style="color:var(--t)">No silence, ever.</strong>
+  <div class="card" style="max-width:540px;width:100%">
+    <p style="font-size:12px;color:var(--td);line-height:1.9;margin-bottom:20px">
+      Paste any YouTube playlist. The AI automatically skips intros, outros, and filler —
+      playing only the hype section of each song, mixed seamlessly into the next.
     </p>
+
     <div class="step-row">
       <div class="badge">1</div>
       <div style="flex:1">
-        <div style="font-size:13px;color:var(--t);margin-bottom:8px">Paste a YouTube playlist URL</div>
+        <div style="font-size:13px;color:var(--t);margin-bottom:8px">YouTube playlist URL</div>
         <input class="inp" id="pl-url" placeholder="https://youtube.com/playlist?list=PL..." />
-        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:6px">Any public playlist, or single video URL to start solo</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:6px">Any public playlist, or a single video URL</div>
       </div>
     </div>
+
     <div class="step-row">
       <div class="badge">2</div>
+      <div style="flex:1">
+        <div style="font-size:13px;color:var(--t);margin-bottom:4px">DJ aggressiveness</div>
+        <div style="font-size:11px;color:var(--td);margin-bottom:10px">How ruthlessly should the DJ cut filler?</div>
+        <div style="display:flex;gap:8px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="cut" value="chill" style="accent-color:var(--cyan)"> Chill (2–3 min/song)
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="cut" value="dj" checked style="accent-color:var(--pink)"> DJ Mode (1–2 min)
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="cut" value="hype" style="accent-color:var(--orange)"> Hype Beast (30–75s)
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="badge">3</div>
+      <div style="flex:1">
+        <div style="font-size:13px;color:var(--t);margin-bottom:8px">
+          Transition style
+        </div>
+        <div style="display:flex;gap:8px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="txs" value="pump" checked style="accent-color:var(--pink)"> Beat Pump
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="txs" value="smooth" style="accent-color:var(--cyan)"> Smooth Fade
+          </label>
+          <label style="display:flex;align-items:center;gap=6px;font-size:11px;color:var(--td);cursor:pointer">
+            <input type="radio" name="txs" value="cut" style="accent-color:var(--orange)"> Hard Cut
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="badge">4</div>
       <div style="flex:1">
         <div style="font-size:13px;color:var(--t);margin-bottom:8px">
           AI DJ commentary <span style="font-size:10px;color:var(--td)">(optional)</span>
         </div>
         <input class="inp" id="ant-key" placeholder="sk-ant-api... (leave blank to skip)" />
         <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:6px">
-          Free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+          Free at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — enables live DJ hype lines
         </div>
       </div>
     </div>
-    <div class="step-row" style="border-bottom:none">
-      <div class="badge">3</div>
-      <div>
-        <div style="font-size:13px;color:var(--t);margin-bottom:4px">Set your transition style</div>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txstyle" value="pump" checked style="accent-color:var(--pink)"> Beat Pump
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txstyle" value="smooth" style="accent-color:var(--cyan)"> Smooth Fade
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txstyle" value="cut" style="accent-color:var(--orange)"> Hard Cut
-          </label>
-        </div>
-      </div>
-    </div>
+
     <button class="btn btn-pink" style="width:100%;padding:16px;font-size:13px;margin-top:8px" onclick="init()">
       🎧 FIRE UP THE SET
     </button>
   </div>
 </div>
 
-<!-- ══════════════════ DJ SCREEN ══════════════════ -->
+<!-- ══════════ DJ SCREEN ══════════ -->
 <div id="s-dj" class="screen">
   <div style="text-align:center;margin-bottom:12px">
     <div class="logo" style="font-size:19px;letter-spacing:5px">DJ CLAUDE</div>
     <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:5px">
-      <div class="logo-sub" style="margin:0">AFTER PROM 2026</div>
+      <div id="cut-badge" style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1.5px;padding:2px 9px;border-radius:10px;background:rgba(255,45,135,.12);border:1px solid rgba(255,45,135,.3);color:var(--pink)">DJ MODE</div>
       <div id="status-pill" class="pill" style="background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.25);color:var(--cyan)">
-        <div class="pill-dot" style="background:var(--cyan)"></div>
-        <span>READY</span>
+        <div class="pill-dot" style="background:var(--cyan)"></div><span>READY</span>
       </div>
     </div>
   </div>
@@ -154,51 +174,48 @@ a:hover{text-decoration:underline}
     <div class="panel" style="display:flex;flex-direction:column">
       <div class="ptitle">NOW PLAYING</div>
 
-      <!-- Dual-player stage -->
       <div id="yt-stage">
-        <!-- Layer A -->
-        <div id="layer-a" class="yt-layer" style="opacity:1;z-index:2">
-          <div id="yt-a"></div>
-        </div>
-        <!-- Layer B -->
-        <div id="layer-b" class="yt-layer" style="opacity:0;z-index:1">
-          <div id="yt-b"></div>
-        </div>
-        <!-- Pump ring pulse -->
+        <div id="layer-a" class="yt-layer" style="opacity:1;z-index:2"><div id="yt-a"></div></div>
+        <div id="layer-b" class="yt-layer" style="opacity:0;z-index:1"><div id="yt-b"></div></div>
         <div id="stage-pulse"></div>
-        <!-- Transition progress strip -->
+        <div id="hype-bar"><div id="hype-range"></div><div id="hype-head"></div></div>
         <div id="tx-strip"><div id="tx-fill"></div></div>
       </div>
+
+      <div id="window-info">window: --:-- → --:--</div>
 
       <div id="tx-badge" style="display:none;margin-bottom:6px">
         <span id="tx-badge-txt" class="pill pulse-anim" style="font-size:8px;padding:3px 10px"></span>
       </div>
 
-      <div style="margin-bottom:8px;flex:1">
+      <div style="margin-bottom:8px;flex:1;min-height:0">
         <div id="tr-title" class="orb" style="font-size:12px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Press play to start</div>
         <div id="tr-artist" style="font-size:10px;color:var(--td)">---</div>
         <div id="tr-nrg" style="font-size:9px;color:var(--pink);margin-top:2px"></div>
       </div>
 
+      <!-- Progress inside the hype window -->
       <div style="margin-bottom:9px">
         <div style="background:rgba(255,255,255,.1);border-radius:2px;height:3px;margin-bottom:4px;overflow:hidden">
           <div id="prog" style="height:100%;border-radius:2px;background:var(--pink);width:0%;transition:width .9s linear;box-shadow:0 0 8px var(--pink)"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,.3)">
-          <span id="t-cur">0:00</span><span id="t-dur">0:00</span>
+          <span id="t-cur">0:00</span>
+          <span id="t-window" style="color:rgba(255,255,255,.2)">window</span>
+          <span id="t-end">0:00</span>
         </div>
       </div>
 
       <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px;align-items:center">
         <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
-        <div style="font-size:9px;color:rgba(255,255,255,.25);line-height:1.5;text-align:left">
-          Vol: <span id="vol-display">85</span>%<br>
-          <input type="range" id="vol-slider" min="0" max="100" value="85" oninput="setVol(this.value)" style="width:70px;accent-color:var(--cyan);cursor:pointer">
+        <div style="font-size:9px;color:rgba(255,255,255,.25);line-height:1.6">
+          Vol: <span id="vol-num">85</span>%<br>
+          <input type="range" id="vol-slider" min="0" max="100" value="85"
+            oninput="setVol(this.value)" style="width:70px;accent-color:var(--cyan);cursor:pointer">
         </div>
       </div>
 
-      <!-- Visualizer -->
-      <div id="viz" style="display:flex;align-items:flex-end;height:36px;gap:2px"></div>
+      <div id="viz" style="display:flex;align-items:flex-end;height:34px;gap:2px"></div>
     </div>
 
     <!-- ── Col 2: Energy + Controls ── -->
@@ -215,17 +232,15 @@ a:hover{text-decoration:underline}
             </div>
           </div>
         </div>
-
-        <!-- Pre-load status -->
         <div style="display:flex;align-items:center;gap:7px;font-size:9px;color:rgba(255,255,255,.28);font-family:'Orbitron',monospace;letter-spacing:.8px">
           <div id="preload-dot" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .4s"></div>
-          <span id="preload-lbl">Next track: idle</span>
+          <span id="preload-lbl">Next: idle</span>
         </div>
       </div>
 
       <div class="panel" style="flex:1">
         <div class="ptitle">VIBE CONTROLS</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:0">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
           <button class="vbtn" style="background:rgba(139,92,246,.16);color:#a78bfa;border:1px solid rgba(139,92,246,.38)" onclick="changeEnergy(2)">🌙<br>Wind Down</button>
           <button class="vbtn" style="background:rgba(0,245,255,.09);color:var(--cyan);border:1px solid rgba(0,245,255,.32)" onclick="changeEnergy(Math.max(1,S.energy-2))">▼<br>Take It Down</button>
           <button class="vbtn" style="background:rgba(255,140,0,.11);color:#ffb347;border:1px solid rgba(255,140,0,.32)" onclick="changeEnergy(Math.min(10,S.energy+2))">▲<br>Turn It Up</button>
@@ -233,13 +248,20 @@ a:hover{text-decoration:underline}
         </div>
         <button class="skip-btn" id="skip-btn" onclick="handleSkip()">⚡ SKIP NOW — INSTANT MIX</button>
 
-        <!-- Transition style toggle (in-session) -->
         <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
-          <div class="ptitle" style="margin-bottom:7px">TRANSITION STYLE</div>
+          <div class="ptitle" style="margin-bottom:7px">TRANSITION</div>
           <div style="display:flex;gap:6px">
-            <button onclick="setTxStyle('pump')" id="ts-pump" class="sm-btn" style="flex:1;font-size:8px;background:rgba(255,45,135,.15);border-color:rgba(255,45,135,.4);color:var(--pink)">PUMP</button>
+            <button onclick="setTxStyle('pump')"   id="ts-pump"   class="sm-btn" style="flex:1;font-size:8px">PUMP</button>
             <button onclick="setTxStyle('smooth')" id="ts-smooth" class="sm-btn" style="flex:1;font-size:8px">SMOOTH</button>
-            <button onclick="setTxStyle('cut')" id="ts-cut" class="sm-btn" style="flex:1;font-size:8px">CUT</button>
+            <button onclick="setTxStyle('cut')"    id="ts-cut"    class="sm-btn" style="flex:1;font-size:8px">CUT</button>
+          </div>
+          <div style="margin-top:10px">
+            <div class="ptitle" style="margin-bottom:7px">CUT AGGRESSION</div>
+            <div style="display:flex;gap:6px">
+              <button onclick="setCutMode('chill')" id="cm-chill" class="sm-btn" style="flex:1;font-size:8px">CHILL</button>
+              <button onclick="setCutMode('dj')"    id="cm-dj"    class="sm-btn" style="flex:1;font-size:8px">DJ</button>
+              <button onclick="setCutMode('hype')"  id="cm-hype"  class="sm-btn" style="flex:1;font-size:8px">BEAST</button>
+            </div>
           </div>
         </div>
       </div>
@@ -268,13 +290,13 @@ a:hover{text-decoration:underline}
 
       <div>
         <div class="ptitle">REQUEST A SONG</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.26);margin-bottom:7px;line-height:1.5">Paste a YouTube URL — it jumps the queue and pre-loads next</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.24);margin-bottom:7px;line-height:1.5">Paste a YouTube URL — bumped to front + pre-loaded</div>
         <div style="display:flex;gap:6px">
           <input class="inp inp-sm" id="req-inp" placeholder="youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')handleRequest()" style="flex:1" />
           <button class="sm-btn" onclick="handleRequest()">SEND</button>
         </div>
         <div style="text-align:right;margin-top:5px">
-          <a href="https://youtube.com" target="_blank" style="font-size:9px;color:rgba(255,255,255,.25)">Find on YouTube ↗</a>
+          <a href="https://youtube.com" target="_blank" style="font-size:9px;color:rgba(255,255,255,.22)">Find on YouTube ↗</a>
         </div>
       </div>
     </div>
@@ -284,59 +306,100 @@ a:hover{text-decoration:underline}
   <div class="panel">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
       <div class="ptitle" style="margin:0">DJ LOG</div>
-      <div id="ai-dot" style="display:none;width:6px;height:6px;border-radius:50%;background:var(--cyan)" class="pulse-anim"></div>
+      <div id="ai-dot"  style="display:none;width:6px;height:6px;border-radius:50%;background:var(--cyan)" class="pulse-anim"></div>
       <span id="ai-lbl" style="display:none;font-family:'Orbitron',monospace;font-size:8px;color:var(--cyan);letter-spacing:2px" class="pulse-anim">CLAUDE THINKING...</span>
     </div>
     <div id="dj-log" style="overflow-y:auto;max-height:88px;display:flex;flex-direction:column;gap:3px">
-      <div style="font-size:11px;color:rgba(255,255,255,.2);padding:4px 0;font-style:italic">Initializing crossfade engine...</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.2);padding:4px 0;font-style:italic">Initializing smart DJ engine...</div>
     </div>
   </div>
 
   <div style="text-align:center;margin-top:8px;font-size:8px;color:rgba(255,255,255,.14);font-family:'Orbitron',monospace;letter-spacing:1px">
-    DUAL-PLAYER · BEAT-PUMP CROSSFADE · ZERO SILENCE
+    SMART HYPE CUTS · DUAL-PLAYER CROSSFADE · ZERO SILENCE
   </div>
 </div>
 
 <div id="toast"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  STATE
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 const S = {
-  tracks: [], queue: [], played: [],
-  current: null,
-  energy: 7,
-  volume: 85,
-  txStyle: 'pump',  // 'pump' | 'smooth' | 'cut'
-  pA: null, pB: null,   // YT player instances
-  aReady: false, bReady: false,
-  active: 'A',          // which player is the "live" one
-  preloaded: false,     // is next song pre-loaded in inactive player?
-  preloadTrack: null,   // track object queued in inactive player
-  inTransition: false,
-  txPending: false,
-  playing: false,
-  addVisible: false,
-  anthropicKey: '',
-  ytApiReady: false, ytCbs: [],
-  pollTimer: null, vizTimer: null, txTimer: null,
-  txCount: 0, txTotal: 0, txMode: null,
+  tracks:[], queue:[], played:[],
+  current:null, currentWindow:null,   // {startAt, endAt, duration}
+  energy:7,
+  volume:85,
+  txStyle:'pump',
+  cutMode:'dj',   // 'chill' | 'dj' | 'hype'
+  pA:null, pB:null,
+  aReady:false, bReady:false,
+  active:'A',
+  preloaded:false, preloadTrack:null, preloadWindow:null,
+  inTransition:false, txPending:false,
+  playing:false,
+  addVisible:false,
+  anthropicKey:'',
+  ytApiReady:false, ytCbs:[],
+  pollTimer:null, vizTimer:null, txTimer:null,
 };
 
-// ════════════════════════════════════════════════════════════════
-//  YT API BOOTSTRAP
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  SMART HYPE WINDOW ENGINE
+//
+//  For each track we compute:
+//    startAt  — where to seek in (skip intro/quiet build)
+//    endAt    — where to cut out (before outro/fade)
+//    The window is [startAt, endAt]
+//
+//  Rules vary by energy AND cutMode.
+// ══════════════════════════════════════════════════════════
+function calcWindow(track, totalDur) {
+  const e = track.energy;
+  const d = totalDur || 210;
+
+  // Base play duration by cutMode
+  let playDur;
+  if (S.cutMode === 'hype') {
+    playDur = e >= 9 ? rnd(30,55) : e >= 7 ? rnd(45,70) : e >= 5 ? rnd(55,80) : rnd(65,90);
+  } else if (S.cutMode === 'dj') {
+    playDur = e >= 9 ? rnd(55,85) : e >= 7 ? rnd(70,100) : e >= 5 ? rnd(85,115) : rnd(100,135);
+  } else { // chill
+    playDur = e >= 9 ? rnd(100,145) : e >= 7 ? rnd(120,165) : e >= 5 ? rnd(140,185) : rnd(155,200);
+  }
+
+  // How much intro to skip (land on verse/chorus/drop)
+  let skipIntro;
+  if (e >= 9)      skipIntro = rnd(18, 32); // skip long DJ-style intros, land right on drop
+  else if (e >= 7) skipIntro = rnd(12, 24);
+  else if (e >= 5) skipIntro = rnd(8,  18);
+  else if (e >= 3) skipIntro = rnd(4,  12);
+  else             skipIntro = rnd(2,   8);
+
+  // For chill mode, be gentler with the intro skip
+  if (S.cutMode === 'chill') skipIntro = Math.floor(skipIntro * 0.5);
+
+  // Don't start past 40% of the song
+  const startAt = Math.min(skipIntro, d * 0.38);
+
+  // Ensure endAt doesn't exceed song
+  const endAt = Math.min(startAt + playDur, d - 4);
+
+  // Clamp: at least 20s of play
+  const actualEnd = Math.max(endAt, startAt + 20);
+
+  return { startAt: Math.floor(startAt), endAt: Math.floor(actualEnd) };
+}
+
+// ══════════════════════════════════════════════════════════
+//  YT API
+// ══════════════════════════════════════════════════════════
 function onYouTubeIframeAPIReady() {
   S.ytApiReady = true;
   S.ytCbs.forEach(f => f());
   S.ytCbs = [];
 }
 function whenYT(cb) { S.ytApiReady ? cb() : S.ytCbs.push(cb); }
-
-// ════════════════════════════════════════════════════════════════
-//  PLAYER ACCESSORS
-// ════════════════════════════════════════════════════════════════
 function liveP()    { return S.active === 'A' ? S.pA : S.pB; }
 function stagingP() { return S.active === 'A' ? S.pB : S.pA; }
 function swapActive() {
@@ -347,73 +410,72 @@ function swapActive() {
   document.getElementById('layer-b').style.zIndex  = S.active === 'B' ? '2' : '1';
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  INIT
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 function init() {
   const url = document.getElementById('pl-url').value.trim();
   S.anthropicKey = document.getElementById('ant-key').value.trim();
-  S.txStyle = document.querySelector('input[name="txstyle"]:checked')?.value || 'pump';
+  S.txStyle  = document.querySelector('input[name="txs"]:checked')?.value  || 'pump';
+  S.cutMode  = document.querySelector('input[name="cut"]:checked')?.value  || 'dj';
 
   if (!url) { showToast('Paste a YouTube URL first!'); return; }
-
   const plMatch  = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
   const vidMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-
   if (!plMatch && !vidMatch) { showToast('Not a valid YouTube URL'); return; }
 
   showScreen('dj');
+  updateCutBadge();
   updateTxStyleUI();
+  updateCutUI();
 
   whenYT(() => {
-    const baseVars = { autoplay: 0, controls: 1, rel: 0, modestbranding: 1, iv_load_policy: 3 };
+    const base = { autoplay:0, controls:1, rel:0, modestbranding:1, iv_load_policy:3 };
     const cfgA = {
-      width: '100%', height: '100%',
-      playerVars: { ...baseVars },
-      events: { onReady: () => { S.aReady = true; onBothReady(); },
-                onStateChange: e => onStateChange(e, 'A'),
-                onError: () => onPlayerError('A') }
+      width:'100%', height:'100%',
+      playerVars:{ ...base },
+      events:{
+        onReady: () => { S.aReady=true; onBothReady(); },
+        onStateChange: e => onStateChange(e,'A'),
+        onError: () => onPlayerError('A')
+      }
     };
     const cfgB = {
-      width: '100%', height: '100%',
-      playerVars: { ...baseVars },
-      events: { onReady: () => { S.bReady = true; onBothReady(); },
-                onStateChange: e => onStateChange(e, 'B'),
-                onError: () => onPlayerError('B') }
+      width:'100%', height:'100%',
+      playerVars:{ ...base },
+      events:{
+        onReady: () => { S.bReady=true; onBothReady(); },
+        onStateChange: e => onStateChange(e,'B'),
+        onError: () => onPlayerError('B')
+      }
     };
-
-    // Load playlist into player A
-    if (plMatch)      cfgA.playerVars.list = plMatch[1], cfgA.playerVars.listType = 'playlist';
+    if (plMatch) { cfgA.playerVars.list = plMatch[1]; cfgA.playerVars.listType = 'playlist'; }
     else if (vidMatch) cfgA.videoId = vidMatch[1];
 
     S.pA = new YT.Player('yt-a', cfgA);
     S.pB = new YT.Player('yt-b', cfgB);
 
-    // Grab playlist IDs after a short delay
     if (plMatch) {
       setTimeout(async () => {
-        const ids = S.pA.getPlaylist ? (S.pA.getPlaylist() || []) : [];
+        const ids = S.pA.getPlaylist?.() || [];
         if (ids.length > 0) {
-          log('⟳ Loading metadata for ' + ids.length + ' tracks...', 'info');
+          log('⟳ Loading ' + ids.length + ' tracks...', 'info');
           await loadMeta(ids.slice(0, 80));
           buildQ(S.energy);
           renderQ();
-          log('✅ ' + S.tracks.length + ' tracks ready — press ▶ to start!', 'hype');
+          log('✅ ' + S.tracks.length + ' tracks loaded — press ▶ to start!', 'hype');
         } else {
-          // Retry once
           setTimeout(async () => {
-            const ids2 = S.pA.getPlaylist ? (S.pA.getPlaylist() || []) : [];
+            const ids2 = S.pA.getPlaylist?.() || [];
             if (ids2.length > 0) {
               await loadMeta(ids2.slice(0, 80));
-              buildQ(S.energy);
-              renderQ();
-              log('✅ Playlist loaded. Press ▶!', 'hype');
+              buildQ(S.energy); renderQ();
+              log('✅ Ready — press ▶!', 'hype');
             }
           }, 3000);
         }
       }, 2500);
     }
-
     buildViz();
     startPoll();
   });
@@ -424,183 +486,157 @@ function onBothReady() {
   S.pA.setVolume(S.volume);
   S.pB.setVolume(0);
   setStatus('READY', 'cyan');
-  if (S.anthropicKey) callDJ('DJ set starting at after-prom party. Energy 7/10. Hype intro, max 2 sentences.', 'hype');
-  else log('🎧 Dual-player engine ready. Press ▶ to kick off your set!', 'hype');
+  if (S.anthropicKey) callDJ('AI DJ set starting. Hype intro, max 2 sentences.','hype');
+  else log('🎧 Smart DJ engine ready. Press ▶ to start!','hype');
 }
 
-// ════════════════════════════════════════════════════════════════
-//  METADATA LOADING (YouTube oEmbed — no API key needed)
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  METADATA
+// ══════════════════════════════════════════════════════════
 async function loadMeta(ids) {
-  for (let i = 0; i < ids.length; i += 6) {
-    await Promise.all(ids.slice(i, i + 6).map(fetchOEmbed));
-    if (i + 6 < ids.length) await sleep(90);
+  for (let i=0; i<ids.length; i+=6) {
+    await Promise.all(ids.slice(i,i+6).map(fetchOEmbed));
+    if (i+6<ids.length) await sleep(90);
   }
 }
-
 async function fetchOEmbed(id) {
   try {
     const r = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
     if (!r.ok) throw 0;
     const d = await r.json();
-    upsertTrack({ id, title: d.title || 'Track', artist: d.author_name || 'YouTube',
-      thumb: `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
-      energy: estimateEnergy(d.title || '', d.author_name || '') });
+    upsert({ id, title:d.title||'Track', artist:d.author_name||'YouTube',
+      thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,
+      energy:estimateEnergy(d.title||'',d.author_name||'') });
   } catch {
-    upsertTrack({ id, title: 'Track', artist: 'YouTube',
-      thumb: `https://img.youtube.com/vi/${id}/mqdefault.jpg`, energy: 6 });
+    upsert({ id, title:'Track', artist:'YouTube',
+      thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`, energy:6 });
   }
 }
-
-function upsertTrack(t) {
-  const i = S.tracks.findIndex(x => x.id === t.id);
-  if (i >= 0) Object.assign(S.tracks[i], t);
-  else S.tracks.push(t);
+function upsert(t) {
+  const i = S.tracks.findIndex(x=>x.id===t.id);
+  if (i>=0) Object.assign(S.tracks[i],t); else S.tracks.push(t);
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  ENERGY ESTIMATION
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 function estimateEnergy(title, artist) {
-  const s = (title + ' ' + artist).toLowerCase();
-  if (/slow\s*danc|ballad|lullaby|unplugged|acoustic|forever\s*(and|&)\s*always|someone\s*like\s*you|let\s*her\s*go|see\s*you\s*again|fix\s*you|skinny\s*love|chasing\s*cars|yellow|hallelujah|night\s*changes/.test(s)) return rnd(2,3);
-  if (/golden\s*hour|heat\s*waves|electric\s*love|watermelon\s*sugar|peaches|sunflower|sunday\s*morning|golden\b|lovely|lover|die\s*for\s*you/.test(s)) return rnd(4,5);
-  if (/chill|vibe|lofi|smooth|mellow|float|wave|easy|drift/.test(s)) return rnd(4,5);
-  if (/blinding\s*lights|industry\s*baby|about\s*damn\s*time|good\s*4\s*u|levitating|\bstay\b|starboy|cruel\s*summer|anti.hero|espresso|bad\s*guy|unholy/.test(s)) return rnd(8,9);
-  if (/party|dance|club|banger|slapper|rave|edm|dubstep|techno|drum.*bass|hard.*style|pump\s*up|get\s*low|jump|bounce|turn\s*up|lit\b/.test(s)) return rnd(8,10);
-  if (/trap|drill|rap|hip\s*hop|freestyle/.test(s)) return rnd(7,9);
-  if (/r&b|soul|funk|groove|smooth/.test(s)) return rnd(5,7);
-  if (/pop\b|indie|folk/.test(s)) return rnd(5,7);
+  const s=(title+' '+artist).toLowerCase();
+  if (/slow\s*danc|ballad|lullaby|unplugged|acoustic|someone\s*like\s*you|let\s*her\s*go|see\s*you\s*again|fix\s*you|skinny\s*love|chasing\s*cars|yellow|hallelujah|night\s*changes/.test(s)) return rnd(2,3);
+  if (/golden\s*hour|heat\s*waves|electric\s*love|watermelon\s*sugar|peaches|sunflower|lovely|lover|die\s*for\s*you/.test(s)) return rnd(4,5);
+  if (/chill|lofi|smooth|mellow|float|wave|easy|drift|vibe/.test(s)) return rnd(4,5);
+  if (/blinding\s*lights|industry\s*baby|about\s*damn\s*time|good\s*4\s*u|levitating|starboy|cruel\s*summer|anti.hero|bad\s*guy|unholy/.test(s)) return rnd(8,9);
+  if (/party|dance|club|banger|rave|edm|dubstep|techno|drum.*bass|pump\s*up|get\s*low|jump|bounce|turn\s*up|lit\b/.test(s)) return rnd(8,10);
+  if (/trap|drill|rap|hip\s*hop/.test(s)) return rnd(7,9);
+  if (/r&b|soul|funk|groove/.test(s)) return rnd(5,7);
   return rnd(5,8);
 }
-function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
-const eColor = e => e>=9?'#ff2d87':e>=7?'#ff8c00':e>=5?'#00f5ff':e>=3?'#8b5cf6':'#4a9eff';
-const eLabel = e => e>=9?'ABSOLUTE BANGER':e>=7?'HIGH ENERGY':e>=5?'VIBING':e>=3?'CHILL MODE':'SLOW DANCE';
+const eColor = e=>e>=9?'#ff2d87':e>=7?'#ff8c00':e>=5?'#00f5ff':e>=3?'#8b5cf6':'#4a9eff';
+const eLabel = e=>e>=9?'ABSOLUTE BANGER':e>=7?'HIGH ENERGY':e>=5?'VIBING':e>=3?'CHILL MODE':'SLOW DANCE';
 
-// Smart start time: skip quiet intros on high-energy tracks
-function startSec(energy) {
-  if (energy >= 9) return 8  + Math.floor(Math.random() * 10); // 8–18s
-  if (energy >= 7) return 4  + Math.floor(Math.random() * 8);  // 4–12s
-  if (energy >= 5) return 2  + Math.floor(Math.random() * 5);  // 2–7s
-  return 0;
-}
-
-// ════════════════════════════════════════════════════════════════
-//  QUEUE MANAGEMENT
-// ════════════════════════════════════════════════════════════════
-function buildQ(energy, n = 8) {
-  const excl = new Set([
-    S.current?.id,
-    S.preloadTrack?.id,
-    ...S.played.slice(-10),
-    ...S.queue.filter(q => q._manual).map(q => q.id)
-  ]);
-  const pool = S.tracks.filter(t => !excl.has(t.id));
+// ══════════════════════════════════════════════════════════
+//  QUEUE
+// ══════════════════════════════════════════════════════════
+function buildQ(energy, n=8) {
+  const excl = new Set([S.current?.id, S.preloadTrack?.id, ...S.played.slice(-10),
+    ...S.queue.filter(q=>q._manual).map(q=>q.id)]);
+  const pool = S.tracks.filter(t=>!excl.has(t.id));
   const sorted = pool
-    .map(t => ({ ...t, _sc: Math.abs(t.energy - energy) + Math.random() * 1.6 }))
-    .sort((a, b) => a._sc - b._sc).slice(0, n);
-  const manual = S.queue.filter(q => q._manual);
-  const auto = sorted.filter(s => !manual.find(m => m.id === s.id));
-  S.queue = [...manual, ...auto].slice(0, n);
+    .map(t=>({...t,_sc:Math.abs(t.energy-energy)+Math.random()*1.6}))
+    .sort((a,b)=>a._sc-b._sc).slice(0,n);
+  const manual = S.queue.filter(q=>q._manual);
+  S.queue = [...manual, ...sorted.filter(s=>!manual.find(m=>m.id===s.id))].slice(0,n);
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  PRE-LOADING
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 function preloadNext() {
   if (S.preloaded || S.inTransition) return;
   if (!S.queue.length) buildQ(S.energy);
   const next = S.queue[0];
   if (!next) return;
 
-  const p = stagingP();
-  const t = startSec(next.energy);
-  p.cueVideoById({ videoId: next.id, startSeconds: t });
-  S.preloadTrack = next;
+  // We don't know the song's full duration until it's loaded,
+  // so use a generous estimate (210s) — we'll refine in the poll loop
+  const win = calcWindow(next, 210);
+  stagingP().cueVideoById({ videoId:next.id, startSeconds:win.startAt });
+  S.preloadTrack  = next;
+  S.preloadWindow = win;
   S.preloaded = true;
 
   document.getElementById('preload-dot').style.background = 'var(--cyan)';
-  document.getElementById('preload-lbl').textContent = 'Loaded: ' + (next.title.slice(0, 22) || 'next track');
+  document.getElementById('preload-lbl').textContent = 'Loaded: ' + (next.title.slice(0,22));
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  STATE CHANGE HANDLER
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 function onStateChange(e, which) {
   const isLive = which === S.active;
   const YTS = YT.PlayerState;
-
   if (isLive) {
-    if (e.data === YTS.PLAYING) {
-      S.playing = true;
-      document.getElementById('play-btn').textContent = '⏸';
+    if (e.data===YTS.PLAYING) {
+      S.playing=true;
+      document.getElementById('play-btn').textContent='⏸';
       syncTrackInfo();
-      setStatus('LIVE', 'pink');
-    } else if (e.data === YTS.PAUSED) {
-      S.playing = false;
-      document.getElementById('play-btn').textContent = '▶';
-      setStatus('PAUSED', 'dim');
-    } else if (e.data === YTS.ENDED) {
+      setStatus('LIVE','pink');
+    } else if (e.data===YTS.PAUSED) {
+      S.playing=false;
+      document.getElementById('play-btn').textContent='▶';
+      setStatus('PAUSED','dim');
+    } else if (e.data===YTS.ENDED) {
       if (!S.inTransition) doTransition('auto');
     }
   } else {
-    // Staging player — keep it muted, don't let it affect UI
     const stg = stagingP();
-    if (stg && e.data === YTS.PLAYING) stg.setVolume(0);
+    if (stg && e.data===YTS.PLAYING) stg.setVolume(0);
   }
 }
 
 function onPlayerError(which) {
-  if (which === S.active) {
-    log('⚠ Track error — skipping...', 'info');
-    setTimeout(() => doTransition('auto'), 300);
-  }
+  if (which===S.active) { log('⚠ Track error — skipping...','info'); setTimeout(()=>doTransition('auto'),300); }
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  PLAYBACK CONTROLS
-// ════════════════════════════════════════════════════════════════
-function togglePlay() {
-  if (!liveP()) return;
-  if (S.playing) liveP().pauseVideo();
-  else liveP().playVideo();
-}
-
-function setVol(v) {
-  S.volume = parseInt(v);
-  document.getElementById('vol-display').textContent = S.volume;
-  if (S.playing && liveP()) liveP().setVolume(S.volume);
-}
+// ══════════════════════════════════════════════════════════
+function togglePlay() { if (!liveP()) return; S.playing ? liveP().pauseVideo() : liveP().playVideo(); }
+function setVol(v) { S.volume=parseInt(v); document.getElementById('vol-num').textContent=S.volume; if (liveP()) liveP().setVolume(S.volume); }
 
 function syncTrackInfo() {
   try {
     const d = liveP().getVideoData();
     if (!d?.video_id) return;
     const id = d.video_id;
-    let t = S.tracks.find(x => x.id === id);
+    let t = S.tracks.find(x=>x.id===id);
     if (!t) {
-      t = { id, title: d.title || 'Now Playing', artist: d.author || 'YouTube',
-        thumb: `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
-        energy: estimateEnergy(d.title || '', d.author || '') };
+      t={id,title:d.title||'Now Playing',artist:d.author||'YouTube',
+        thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:estimateEnergy(d.title||'',d.author||'')};
       S.tracks.push(t);
-    } else {
-      if (d.title) t.title = d.title;
-      if (d.author) t.artist = d.author;
-    }
+    } else { if(d.title)t.title=d.title; if(d.author)t.artist=d.author; }
+
     if (S.current?.id !== id) {
       S.current = t;
+      // Now we have a real duration from the player — recalculate window
+      const dur = liveP().getDuration() || 210;
+      const win = calcWindow(t, dur);
+      S.currentWindow = win;
+      // Seek to the calculated start point
+      liveP().seekTo(win.startAt, true);
       S.played.push(id);
-      S.queue = S.queue.filter(q => q.id !== id);
-      if (S.queue.length < 3) buildQ(S.energy);
+      S.queue = S.queue.filter(q=>q.id!==id);
+      if (S.queue.length<3) buildQ(S.energy);
       updateNowPlaying();
       renderQ();
+      updateWindowUI(win, dur);
     }
   } catch {}
 }
 
-// ════════════════════════════════════════════════════════════════
-//  POLLING (progress bar + auto-preload + auto-transition trigger)
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  POLLING — progress + hype-window end trigger
+// ══════════════════════════════════════════════════════════
 function startPoll() {
   clearInterval(S.pollTimer);
   S.pollTimer = setInterval(() => {
@@ -608,20 +644,36 @@ function startPoll() {
     try {
       const cur = liveP().getCurrentTime() || 0;
       const dur = liveP().getDuration() || 1;
-      const rem = dur - cur;
+      const win = S.currentWindow || { startAt:0, endAt:dur };
 
-      // Progress bar
-      document.getElementById('prog').style.width = ((cur / dur) * 100) + '%';
+      // Progress bar — relative to hype window
+      const winLen = win.endAt - win.startAt;
+      const pct = Math.max(0, Math.min(100, ((cur - win.startAt) / winLen) * 100));
+      document.getElementById('prog').style.width = pct + '%';
       document.getElementById('t-cur').textContent = fmt(cur);
-      document.getElementById('t-dur').textContent = fmt(dur);
+      document.getElementById('t-end').textContent = fmt(win.endAt);
 
-      // Pre-load next when 30s remain (or 40% of song, whichever is sooner)
-      const preloadAt = Math.min(30, dur * 0.4);
-      if (rem < preloadAt && !S.preloaded && !S.inTransition) preloadNext();
+      // Hype-window playhead indicator
+      updateHypeHead(cur, win, dur);
 
-      // Trigger transition when 10s remain (or at 92% if song < 30s)
-      const txAt = dur < 30 ? dur * 0.92 : 10;
-      if (rem < txAt && rem > 0 && !S.txPending && !S.inTransition && S.preloaded) {
+      // Refine preload window once we know full duration
+      if (S.preloaded && S.preloadWindow && dur > 30) {
+        // Don't refine again if already refined
+      }
+
+      // Pre-load next: when we're 30s (or 40%) from the end of our window
+      const remInWindow = win.endAt - cur;
+      if (remInWindow < 32 && !S.preloaded && !S.inTransition) preloadNext();
+
+      // Trigger transition: 9s before our window's endAt
+      const txLeadin = S.cutMode === 'hype' ? 6 : S.cutMode === 'dj' ? 8 : 10;
+      if (remInWindow < txLeadin && remInWindow > 0 && !S.txPending && !S.inTransition && S.preloaded) {
+        S.txPending = true;
+        doTransition('auto');
+      }
+
+      // Hard guard: if somehow we went past endAt
+      if (cur >= win.endAt + 2 && !S.inTransition) {
         S.txPending = true;
         doTransition('auto');
       }
@@ -629,431 +681,373 @@ function startPoll() {
   }, 700);
 }
 
-// ════════════════════════════════════════════════════════════════
-//  ★ TRANSITION ENGINE ★
-// ════════════════════════════════════════════════════════════════
+function updateWindowUI(win, totalDur) {
+  const d = totalDur || 210;
+  document.getElementById('window-info').textContent = `window: ${fmt(win.startAt)} → ${fmt(win.endAt)}`;
+  const startPct = (win.startAt / d) * 100;
+  const widthPct = ((win.endAt - win.startAt) / d) * 100;
+  document.getElementById('hype-range').style.left  = startPct + '%';
+  document.getElementById('hype-range').style.width = widthPct + '%';
+  document.getElementById('t-window').textContent = `${fmt(win.endAt - win.startAt)} window`;
+}
+
+function updateHypeHead(cur, win, totalDur) {
+  const pct = Math.max(0, Math.min(100, (cur / totalDur) * 100));
+  document.getElementById('hype-head').style.left = pct + '%';
+}
+
+// ══════════════════════════════════════════════════════════
+//  ★  TRANSITION ENGINE  ★
+// ══════════════════════════════════════════════════════════
 async function doTransition(mode) {
   if (S.inTransition) return;
   S.inTransition = true;
   S.txPending = false;
 
-  // Make sure staging player has next track
-  if (!S.preloaded) {
-    buildQ(S.energy);
-    preloadNext();
-    await sleep(1200); // give it time to cue
-  }
-
-  if (!S.preloadTrack) { S.inTransition = false; return; }
+  if (!S.preloaded) { preloadNext(); await sleep(1200); }
+  if (!S.preloadTrack) { S.inTransition=false; return; }
 
   const fadeOut = liveP();
   const fadeIn  = stagingP();
-  const txDur   = mode === 'skip' ? 5500 : 8500;
+  const txDur   = mode==='skip' ? 4500 : (S.cutMode==='hype' ? 5500 : 7500);
 
-  // Update status UI
-  setStatus('MIXING', 'pink');
-  showTxBadge(mode === 'skip' ? '⚡ QUICK MIX' : '↪ CROSSFADE', 'var(--pink)', txDur);
+  setStatus('MIXING','pink');
+  showTxBadge(mode==='skip'?'⚡ INSTANT MIX':'↪ SMART CUT','var(--pink)', txDur);
   document.getElementById('stage-pulse').className = 'ring-anim';
 
-  // Start the incoming track playing (muted)
+  // Start incoming (muted)
+  const win = S.preloadWindow || { startAt:0, endAt:210 };
   fadeIn.setVolume(0);
+  fadeIn.seekTo(win.startAt, true);
+  await sleep(250);
   fadeIn.playVideo();
-  await sleep(300); // brief buffer
+  await sleep(350);
 
-  // Run the chosen transition style
-  if (S.txStyle === 'pump')   await txPump(fadeOut, fadeIn, txDur);
-  else if (S.txStyle === 'smooth') await txSmooth(fadeOut, fadeIn, txDur);
-  else                             await txCut(fadeOut, fadeIn);
+  if (S.txStyle==='pump')   await txPump(fadeOut, fadeIn, txDur);
+  else if (S.txStyle==='smooth') await txSmooth(fadeOut, fadeIn, txDur);
+  else                           await txCut(fadeOut, fadeIn);
 
-  // Finalize handoff
   fadeOut.pauseVideo();
   fadeOut.setVolume(0);
   fadeIn.setVolume(S.volume);
-
-  // Swap visual layers
   swapActive();
 
-  // Update state
   const next = S.preloadTrack;
-  S.queue = S.queue.filter(q => q.id !== next.id);
-  S.current = next;
+  S.current       = next;
+  S.currentWindow = S.preloadWindow;
   S.played.push(next.id);
+  S.queue = S.queue.filter(q=>q.id!==next.id);
   S.preloaded = false;
-  S.preloadTrack = null;
+  S.preloadTrack  = null;
+  S.preloadWindow = null;
+
+  // Refine window now that we have actual duration from the player
+  try {
+    const realDur = fadeIn.getDuration() || 210;
+    const refinedWin = calcWindow(next, realDur);
+    S.currentWindow = refinedWin;
+    updateWindowUI(refinedWin, realDur);
+    // If we seeked too early, seek forward
+    const nowAt = fadeIn.getCurrentTime() || 0;
+    if (nowAt < refinedWin.startAt) fadeIn.seekTo(refinedWin.startAt, true);
+  } catch {}
 
   updateNowPlaying();
   buildQ(S.energy);
   renderQ();
 
-  document.getElementById('stage-pulse').className = '';
-  document.getElementById('preload-dot').style.background = 'rgba(255,255,255,.2)';
-  document.getElementById('preload-lbl').textContent = 'Next track: idle';
+  document.getElementById('stage-pulse').className='';
+  document.getElementById('preload-dot').style.background='rgba(255,255,255,.2)';
+  document.getElementById('preload-lbl').textContent='Next: idle';
+  setStatus('LIVE','pink');
+  S.inTransition=false;
+  S.txPending=false;
 
-  setStatus('LIVE', 'pink');
-  S.inTransition = false;
-  S.txPending = false;
+  const line = CANNED.transition[Math.floor(Math.random()*CANNED.transition.length)];
+  log(line,'transition');
+  if (S.anthropicKey) callDJ(`Mixed into "${next.title}" by ${next.artist}. Energy ${next.energy}/10. DJ is cutting only the best part. Short transition line.`,'transition');
 
-  // Log + AI
-  const line = CANNED.transition[Math.floor(Math.random() * CANNED.transition.length)];
-  log(line, 'transition');
-  if (S.anthropicKey) callDJ(`Mixed into "${next.title}" by ${next.artist}. Energy ${next.energy}/10. Short DJ transition line.`, 'transition');
-
-  // Pre-load the next-next track
-  if (S.queue.length < 3) buildQ(S.energy);
-  setTimeout(preloadNext, 3000);
+  if (S.queue.length<3) buildQ(S.energy);
+  setTimeout(preloadNext, 2500);
 }
 
-// ── Beat-Pump Transition (flagship) ──────────────────────────────
-// Stutter-fades the outgoing track on the beat while incoming ramps in.
-// Both tracks audible simultaneously — no silence ever.
+// ── Beat Pump ────────────────────────────────────────────
 async function txPump(fadeOut, fadeIn, durationMs) {
-  const BPM   = 128;
-  const BEAT  = 60000 / BPM;         // ≈469ms
-  const HOLD  = BEAT * 0.50;         // on-beat hold
-  const DIP   = BEAT * 0.20;         // dip duration
-  const RISE  = BEAT * 0.30;         // rise back up
-  const total = Math.ceil(durationMs / BEAT);
-
-  // Phase 1 (first 2 beats): fade-in starts subtly under current track
-  for (let i = 0; i < 2; i++) {
-    fadeIn.setVolume(Math.round(S.volume * 0.08 * (i + 1)));
-    await sleep(BEAT);
+  const BPM=128, BEAT=60000/BPM, HOLD=BEAT*.48, DIP=BEAT*.22, RISE=BEAT*.30;
+  const total = Math.ceil(durationMs/BEAT);
+  for(let i=0;i<2;i++){fadeIn.setVolume(Math.round(S.volume*.08*(i+1)));await sleep(BEAT);}
+  const pump=total-4;
+  for(let i=0;i<pump;i++){
+    const p=i/pump;
+    const outBase=S.volume*Math.max(0,1-p*1.1);
+    const inVol=Math.round(S.volume*Math.min(1,0.16+p*0.9));
+    fadeIn.setVolume(inVol); fadeOut.setVolume(Math.round(outBase)); await sleep(HOLD);
+    if(outBase>4){fadeOut.setVolume(Math.round(outBase*.08));await sleep(DIP);fadeOut.setVolume(Math.round(outBase*.52));await sleep(RISE);}
+    else await sleep(DIP+RISE);
   }
-
-  // Phase 2 (main pump): stutter out + ramp in
-  const pumpBeats = total - 4;
-  for (let i = 0; i < pumpBeats; i++) {
-    const p        = i / pumpBeats;
-    const outBase  = S.volume * Math.max(0, 1 - p * 1.1);
-    const inVol    = Math.round(S.volume * Math.min(1, 0.16 + p * 0.9));
-
-    fadeIn.setVolume(inVol);
-    fadeOut.setVolume(Math.round(outBase));
-    await sleep(HOLD);
-
-    // Dip
-    if (outBase > 4) {
-      fadeOut.setVolume(Math.round(outBase * 0.08));
-      await sleep(DIP);
-      fadeOut.setVolume(Math.round(outBase * 0.55));
-      await sleep(RISE);
-    } else {
-      await sleep(DIP + RISE);
-    }
-  }
-
-  // Phase 3 (last 2 beats): clean finish
   fadeOut.setVolume(0);
-  for (let i = 0; i < 4; i++) {
-    fadeIn.setVolume(Math.round(S.volume * (0.88 + 0.12 * (i / 4))));
-    await sleep(BEAT * 0.5);
-  }
+  for(let i=0;i<4;i++){fadeIn.setVolume(Math.round(S.volume*(.88+.12*(i/4))));await sleep(BEAT*.5);}
 }
 
-// ── Smooth Crossfade ─────────────────────────────────────────────
+// ── Smooth Crossfade ─────────────────────────────────────
 async function txSmooth(fadeOut, fadeIn, durationMs) {
-  const STEPS = 24;
-  const dt = durationMs / STEPS;
-  for (let i = 0; i <= STEPS; i++) {
-    const t = i / STEPS;
-    fadeOut.setVolume(Math.round(S.volume * (1 - t)));
-    fadeIn.setVolume(Math.round(S.volume * t));
+  const STEPS=24, dt=durationMs/STEPS;
+  for(let i=0;i<=STEPS;i++){
+    fadeOut.setVolume(Math.round(S.volume*(1-i/STEPS)));
+    fadeIn.setVolume(Math.round(S.volume*(i/STEPS)));
     await sleep(dt);
   }
 }
 
-// ── Hard Cut ─────────────────────────────────────────────────────
+// ── Hard Cut ─────────────────────────────────────────────
 async function txCut(fadeOut, fadeIn) {
   await rampVol(fadeOut, S.volume, 0, 600);
   fadeIn.setVolume(S.volume);
 }
 
-// ════════════════════════════════════════════════════════════════
-//  VIBE + SKIP CONTROLS
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  VIBE + SKIP + REQUEST
+// ══════════════════════════════════════════════════════════
 async function changeEnergy(newE) {
-  const e = Math.max(1, Math.min(10, Math.round(newE)));
-  S.energy = e;
-  // Clear preload so we re-preload with new energy
-  if (S.preloaded && S.preloadTrack) {
-    S.preloaded = false;
-    S.preloadTrack = null;
-  }
-  buildQ(e);
-  renderQ();
-  updateEnergyUI();
-
-  const type = e >= 7 ? 'hype' : 'chill';
-  log(CANNED[type][Math.floor(Math.random() * CANNED[type].length)], type);
-  if (S.anthropicKey) callDJ(`Energy shift to ${e}/10. Current: "${S.current?.title || 'current track'}". ${e>=7?'Ramp it up':'Slow it down'}. 2-sentence DJ line.`, type);
-
-  // Pre-load the new "next" track
-  await sleep(500);
+  const e=Math.max(1,Math.min(10,Math.round(newE)));
+  S.energy=e;
+  if(S.preloaded){ S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null; }
+  buildQ(e); renderQ(); updateEnergyUI();
+  const type=e>=7?'hype':'chill';
+  log(CANNED[type][Math.floor(Math.random()*CANNED[type].length)],type);
+  if(S.anthropicKey) callDJ(`Energy change to ${e}/10. Current: "${S.current?.title||'track'}". ${e>=7?'RAMP UP':'Chill out'}. 2-sentence DJ line.`,type);
+  await sleep(400);
   preloadNext();
 }
 
 async function handleSkip() {
-  const btn = document.getElementById('skip-btn');
-  if (S.inTransition) return;
-  btn.disabled = true;
-
-  log(CANNED.skip[Math.floor(Math.random() * CANNED.skip.length)], 'skip');
-  if (S.anthropicKey) callDJ(`Emergency skip! Dropping into next song in seconds. Short hype line.`, 'skip');
-
-  // If not pre-loaded yet, do it now
-  if (!S.preloaded) { preloadNext(); await sleep(1000); }
-
+  const btn=document.getElementById('skip-btn');
+  if(S.inTransition) return;
+  btn.disabled=true;
+  log(CANNED.skip[Math.floor(Math.random()*CANNED.skip.length)],'skip');
+  if(S.anthropicKey) callDJ('Emergency skip to next track. Short hype line.','skip');
+  if(!S.preloaded){ preloadNext(); await sleep(800); }
   await doTransition('skip');
-  setTimeout(() => { btn.disabled = false; }, 2000);
+  setTimeout(()=>{ btn.disabled=false; },2000);
 }
 
-// ════════════════════════════════════════════════════════════════
-//  REQUEST + ADD SONG
-// ════════════════════════════════════════════════════════════════
 async function handleRequest() {
-  const val = document.getElementById('req-inp').value.trim();
-  if (!val) return;
-  document.getElementById('req-inp').value = '';
-  const id = extractId(val);
-  if (!id) { showToast('Paste a full YouTube video URL'); return; }
-
+  const val=document.getElementById('req-inp').value.trim();
+  if(!val) return;
+  document.getElementById('req-inp').value='';
+  const id=extractId(val);
+  if(!id){ showToast('Paste a full YouTube video URL'); return; }
   await fetchOEmbed(id);
-  const t = S.tracks.find(x => x.id === id) ||
-    { id, title: 'Requested Track', artist: 'YouTube', thumb: `https://img.youtube.com/vi/${id}/mqdefault.jpg`, energy: S.energy };
-  t._manual = true;
+  const t=S.tracks.find(x=>x.id===id)||{id,title:'Requested Track',artist:'YouTube',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:S.energy};
+  t._manual=true;
   S.queue.unshift(t);
-  S.queue = S.queue.slice(0, 8);
-
-  // Immediately pre-load this track in staging player
-  S.preloaded = false;
-  S.preloadTrack = null;
+  S.queue=S.queue.slice(0,8);
+  S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null;
   preloadNext();
-
   renderQ();
-  log(CANNED.request[Math.floor(Math.random() * CANNED.request.length)] + ` "${t.title}" — pre-loading now!`, 'request');
-  if (S.anthropicKey) callDJ(`Request for "${t.title}" bumped to front and pre-loading. Short hype line.`, 'request');
+  log(CANNED.request[Math.floor(Math.random()*CANNED.request.length)]+` "${t.title}" — pre-loading!`,'request');
+  if(S.anthropicKey) callDJ(`Request for "${t.title}" bumped up and pre-loading. Short hype line.`,'request');
 }
 
 async function addSong() {
-  const val = document.getElementById('add-inp').value.trim();
-  if (!val) return;
-  document.getElementById('add-inp').value = '';
-  const id = extractId(val);
-  if (!id) { showToast('Paste a full YouTube video URL'); return; }
+  const val=document.getElementById('add-inp').value.trim();
+  if(!val) return;
+  document.getElementById('add-inp').value='';
+  const id=extractId(val);
+  if(!id){ showToast('Paste a full YouTube video URL'); return; }
   await fetchOEmbed(id);
-  const t = S.tracks.find(x => x.id === id);
-  if (t) {
-    t._manual = true;
-    S.queue.unshift(t);
-    S.queue = S.queue.slice(0, 8);
-    renderQ();
-    showToast('Added: ' + t.title);
-  }
+  const t=S.tracks.find(x=>x.id===id);
+  if(t){ t._manual=true; S.queue.unshift(t); S.queue=S.queue.slice(0,8); renderQ(); showToast('Added: '+t.title); }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  TRANSITION STYLE TOGGLE
-// ════════════════════════════════════════════════════════════════
-function setTxStyle(style) {
-  S.txStyle = style;
-  updateTxStyleUI();
+// ══════════════════════════════════════════════════════════
+//  CUT MODE + TX STYLE
+// ══════════════════════════════════════════════════════════
+function setCutMode(m) {
+  S.cutMode=m;
+  updateCutBadge();
+  updateCutUI();
+  // Force re-preload with new window calculations
+  if(S.preloaded){ S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null; setTimeout(preloadNext,300); }
+}
+function setTxStyle(s) { S.txStyle=s; updateTxStyleUI(); }
+
+function updateCutBadge() {
+  const labels={chill:'CHILL MODE',dj:'DJ MODE',hype:'HYPE BEAST'};
+  document.getElementById('cut-badge').textContent = labels[S.cutMode]||'DJ MODE';
+}
+function updateCutUI() {
+  const active={chill:'rgba(0,245,255,.15)',dj:'rgba(255,45,135,.2)',hype:'rgba(255,140,0,.18)'};
+  const abord={chill:'rgba(0,245,255,.45)',dj:'rgba(255,45,135,.5)',hype:'rgba(255,140,0,.45)'};
+  const acol={chill:'var(--cyan)',dj:'var(--pink)',hype:'var(--orange)'};
+  ['chill','dj','hype'].forEach(m=>{
+    const btn=document.getElementById('cm-'+m);
+    if(!btn) return;
+    if(m===S.cutMode){
+      btn.style.background=active[m]; btn.style.borderColor=abord[m]; btn.style.color=acol[m];
+    } else {
+      btn.style.background='rgba(0,245,255,.08)'; btn.style.borderColor='rgba(0,245,255,.28)'; btn.style.color='var(--cyan)';
+    }
+  });
 }
 function updateTxStyleUI() {
-  ['pump','smooth','cut'].forEach(s => {
-    const btn = document.getElementById('ts-' + s);
-    if (!btn) return;
-    if (s === S.txStyle) {
-      btn.style.background = s==='pump'?'rgba(255,45,135,.2)':s==='smooth'?'rgba(0,245,255,.15)':'rgba(255,140,0,.15)';
-      btn.style.borderColor = s==='pump'?'rgba(255,45,135,.5)':s==='smooth'?'rgba(0,245,255,.45)':'rgba(255,140,0,.45)';
-      btn.style.color = s==='pump'?'var(--pink)':s==='smooth'?'var(--cyan)':'var(--orange)';
+  const ac={pump:'rgba(255,45,135,.2)',smooth:'rgba(0,245,255,.15)',cut:'rgba(255,140,0,.15)'};
+  const ab={pump:'rgba(255,45,135,.5)',smooth:'rgba(0,245,255,.45)',cut:'rgba(255,140,0,.45)'};
+  const acl={pump:'var(--pink)',smooth:'var(--cyan)',cut:'var(--orange)'};
+  ['pump','smooth','cut'].forEach(s=>{
+    const btn=document.getElementById('ts-'+s);
+    if(!btn) return;
+    if(s===S.txStyle){
+      btn.style.background=ac[s]; btn.style.borderColor=ab[s]; btn.style.color=acl[s];
     } else {
-      btn.style.background = 'rgba(0,245,255,.08)';
-      btn.style.borderColor = 'rgba(0,245,255,.28)';
-      btn.style.color = 'var(--cyan)';
+      btn.style.background='rgba(0,245,255,.08)'; btn.style.borderColor='rgba(0,245,255,.28)'; btn.style.color='var(--cyan)';
     }
   });
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  VISUALIZER
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 function buildViz() {
-  document.getElementById('viz').innerHTML = Array(26).fill(0).map((_,i) =>
-    `<div class="vbar" id="vb${i}" style="height:8%"></div>`).join('');
+  document.getElementById('viz').innerHTML=Array(26).fill(0).map((_,i)=>`<div class="vbar" id="vb${i}" style="height:8%"></div>`).join('');
   clearInterval(S.vizTimer);
-  S.vizTimer = setInterval(() => {
-    for (let i = 0; i < 26; i++) {
-      const el = document.getElementById('vb' + i);
-      if (!el) continue;
-      if (!S.playing) { const h = parseFloat(el.style.height); el.style.height = Math.max(4, h * 0.91) + '%'; continue; }
-      const base = 15 + S.energy * 4.5;
-      const wave = Math.sin(Date.now() / 170 + i * 0.74) * S.energy * 2.6;
-      const rand = (Math.random() - .5) * S.energy * 6;
-      el.style.height = Math.max(5, Math.min(94, base + wave + rand)) + '%';
+  S.vizTimer=setInterval(()=>{
+    for(let i=0;i<26;i++){
+      const el=document.getElementById('vb'+i);
+      if(!el) continue;
+      if(!S.playing){const h=parseFloat(el.style.height);el.style.height=Math.max(4,h*.91)+'%';continue;}
+      const base=15+S.energy*4.5;
+      const wave=Math.sin(Date.now()/170+i*.74)*S.energy*2.6;
+      const rand=(Math.random()-.5)*S.energy*6;
+      el.style.height=Math.max(5,Math.min(94,base+wave+rand))+'%';
     }
-  }, 80);
+  },80);
 }
 
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  AI DJ
+// ══════════════════════════════════════════════════════════
+const CANNED={
+  hype:     ["LET'S GO — energy RISING!","DROPPING the heat right now!","🔥 Feel that — vibes are MAXED!"],
+  chill:    ["Easing it down... feel that.","Smooth shift — breathe it in.","Slowing the tempo now."],
+  transition:["Clean cut — next track in!","MIXING IN — watch this.","Seamless drop — you felt that!"],
+  skip:     ["CUTTING NOW — new vibe!","Emergency mix — here we GO!","Fast cut — next up in seconds!"],
+  request:  ["Request LOCKED IN —","Bumping to front:","Your song — jumping the queue:"],
+};
+
+async function callDJ(prompt,type) {
+  document.getElementById('ai-dot').style.display='block';
+  document.getElementById('ai-lbl').style.display='inline';
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':S.anthropicKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:1000,
+        system:"You are a smart AI DJ. Max 2 punchy sentences. DJ slang: drops, crossfades, vibes. Open with: DROPPING..., MIXING..., LET'S GO..., FEEL THAT... Never break character.",
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const d=await res.json();
+    const text=d.content?.[0]?.text;
+    if(text) log(text,type);
+  } catch { log(CANNED[type]?.[0]||'Vibes are electric!',type); }
+  document.getElementById('ai-dot').style.display='none';
+  document.getElementById('ai-lbl').style.display='none';
+}
+
+// ══════════════════════════════════════════════════════════
 //  UI HELPERS
-// ════════════════════════════════════════════════════════════════
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('s-' + id).classList.add('active');
+// ══════════════════════════════════════════════════════════
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
+
+function setStatus(label,color){
+  const pill=document.getElementById('status-pill');
+  const dot=pill.querySelector('.pill-dot'), span=pill.querySelector('span');
+  span.textContent=label;
+  const c=color==='pink'?'var(--pink)':color==='cyan'?'var(--cyan)':'rgba(255,255,255,.3)';
+  const bg=color==='pink'?'rgba(255,45,135,.1)':color==='cyan'?'rgba(0,245,255,.1)':'rgba(255,255,255,.05)';
+  const bc=color==='pink'?'rgba(255,45,135,.3)':color==='cyan'?'rgba(0,245,255,.25)':'rgba(255,255,255,.1)';
+  pill.style.background=bg; pill.style.border=`1px solid ${bc}`; pill.style.color=c; dot.style.background=c;
 }
 
-function showToast(m) {
-  const t = document.getElementById('toast');
-  t.textContent = m; t.style.display = 'block';
-  setTimeout(() => t.style.display = 'none', 3000);
-}
-
-function setStatus(label, color) {
-  const pill = document.getElementById('status-pill');
-  const dot  = pill.querySelector('.pill-dot');
-  const span = pill.querySelector('span');
-  span.textContent = label;
-  const c = color === 'pink' ? 'var(--pink)' : color === 'cyan' ? 'var(--cyan)' : 'rgba(255,255,255,.3)';
-  const bg = color === 'pink' ? 'rgba(255,45,135,.1)' : color === 'cyan' ? 'rgba(0,245,255,.1)' : 'rgba(255,255,255,.05)';
-  const bc = color === 'pink' ? 'rgba(255,45,135,.3)' : color === 'cyan' ? 'rgba(0,245,255,.25)' : 'rgba(255,255,255,.1)';
-  pill.style.background = bg;
-  pill.style.border = `1px solid ${bc}`;
-  pill.style.color = c;
-  dot.style.background = c;
-}
-
-function showTxBadge(text, color, durationMs) {
-  const badge = document.getElementById('tx-badge');
-  const txt   = document.getElementById('tx-badge-txt');
-  const fill  = document.getElementById('tx-fill');
-  badge.style.display = 'block';
-  txt.textContent = text;
-  txt.style.background = color + '22';
-  txt.style.border = `1px solid ${color}55`;
-  txt.style.color = color;
-  fill.style.background = color;
-  fill.style.width = '0%';
-  fill.style.transition = `width ${durationMs}ms linear`;
-  setTimeout(() => fill.style.width = '100%', 50);
+function showTxBadge(text,color,durationMs){
+  const badge=document.getElementById('tx-badge'), txt=document.getElementById('tx-badge-txt');
+  const fill=document.getElementById('tx-fill');
+  badge.style.display='block'; txt.textContent=text;
+  txt.style.background=color+'22'; txt.style.border=`1px solid ${color}55`; txt.style.color=color;
+  fill.style.background=color; fill.style.width='0%'; fill.style.transition=`width ${durationMs}ms linear`;
+  setTimeout(()=>fill.style.width='100%',50);
   clearInterval(S.txTimer);
-  S.txTimer = setTimeout(() => { badge.style.display = 'none'; }, durationMs + 200);
+  S.txTimer=setTimeout(()=>{ badge.style.display='none'; },durationMs+200);
 }
 
-function updateNowPlaying() {
-  if (!S.current) return;
-  const ec = eColor(S.current.energy);
-  document.getElementById('tr-title').textContent = S.current.title;
-  document.getElementById('tr-artist').textContent = S.current.artist;
-  document.getElementById('tr-nrg').textContent = `⚡ ENERGY ${S.current.energy}/10 — ${eLabel(S.current.energy)}`;
-  document.getElementById('tr-nrg').style.color = ec;
-  document.getElementById('prog').style.background = ec;
-  document.getElementById('prog').style.boxShadow = `0 0 8px ${ec}`;
+function updateNowPlaying(){
+  if(!S.current) return;
+  const ec=eColor(S.current.energy);
+  document.getElementById('tr-title').textContent=S.current.title;
+  document.getElementById('tr-artist').textContent=S.current.artist;
+  document.getElementById('tr-nrg').textContent=`⚡ ENERGY ${S.current.energy}/10 — ${eLabel(S.current.energy)}`;
+  document.getElementById('tr-nrg').style.color=ec;
+  document.getElementById('prog').style.background=ec;
+  document.getElementById('prog').style.boxShadow=`0 0 8px ${ec}`;
 }
 
-function updateEnergyUI() {
-  const ec = eColor(S.energy);
-  document.getElementById('e-num').textContent = S.energy;
-  document.getElementById('e-num').style.color = ec;
-  document.getElementById('e-num').style.textShadow = `0 0 18px ${ec}`;
-  document.getElementById('e-lbl').textContent = eLabel(S.energy);
-  document.getElementById('e-bar').style.width = (S.energy * 10) + '%';
-  document.getElementById('e-bar').style.background = `linear-gradient(to right,var(--purple),${ec})`;
-  document.getElementById('e-bar').style.boxShadow = `0 0 10px ${ec}`;
+function updateEnergyUI(){
+  const ec=eColor(S.energy);
+  document.getElementById('e-num').textContent=S.energy;
+  document.getElementById('e-num').style.color=ec;
+  document.getElementById('e-num').style.textShadow=`0 0 18px ${ec}`;
+  document.getElementById('e-lbl').textContent=eLabel(S.energy);
+  document.getElementById('e-bar').style.width=(S.energy*10)+'%';
+  document.getElementById('e-bar').style.background=`linear-gradient(to right,var(--purple),${ec})`;
+  document.getElementById('e-bar').style.boxShadow=`0 0 10px ${ec}`;
 }
 
-function renderQ() {
-  const el = document.getElementById('q-list');
-  if (!S.queue.length) {
-    el.innerHTML = '<div style="font-size:10px;color:rgba(255,255,255,.22);padding:6px 0">Building queue...</div>';
-    return;
-  }
-  el.innerHTML = S.queue.slice(0, 7).map((t, i) => {
-    const ec = eColor(t.energy);
-    const isPreload = S.preloadTrack?.id === t.id;
-    return `<div class="qitem" style="${isPreload ? 'border-color:' + ec + '44;background:' + ec + '09' : ''}">
-      <div style="font-size:8px;color:rgba(255,255,255,.22);min-width:12px">${i + 1}</div>
-      ${t.thumb ? `<img src="${t.thumb}" style="width:28px;height:21px;object-fit:cover;border-radius:3px;flex-shrink:0">` : ''}
+function renderQ(){
+  const el=document.getElementById('q-list');
+  if(!S.queue.length){el.innerHTML='<div style="font-size:10px;color:rgba(255,255,255,.22);padding:6px 0">Building queue...</div>';return;}
+  el.innerHTML=S.queue.slice(0,7).map((t,i)=>{
+    const ec=eColor(t.energy);
+    const isNext=S.preloadTrack?.id===t.id;
+    const win=isNext&&S.preloadWindow?` · ${fmt(S.preloadWindow.startAt)}→${fmt(S.preloadWindow.endAt)}`:'';
+    return `<div class="qitem" style="${isNext?'border-color:'+ec+'44;background:'+ec+'09':''}">
+      <div style="font-size:8px;color:rgba(255,255,255,.22);min-width:12px">${i+1}</div>
+      ${t.thumb?`<img src="${t.thumb}" style="width:28px;height:21px;object-fit:cover;border-radius:3px;flex-shrink:0">`:''}
       <div style="flex:1;min-width:0">
         <div style="font-size:10px;color:var(--t);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.title}</div>
-        <div style="font-size:8px;color:rgba(255,255,255,.3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.artist}${isPreload ? ' <span style="color:'+ec+'">· LOADING</span>' : ''}</div>
+        <div style="font-size:8px;color:rgba(255,255,255,.3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.artist}${isNext?` <span style="color:${ec}">· LOADED${win}</span>`:''}</div>
       </div>
       <div class="edot" style="background:${ec}18;border:1px solid ${ec}44;color:${ec}">${t.energy}</div>
     </div>`;
   }).join('');
 }
 
-function toggleAdd() {
-  S.addVisible = !S.addVisible;
-  document.getElementById('add-panel').style.display = S.addVisible ? 'block' : 'none';
-}
+function toggleAdd(){S.addVisible=!S.addVisible;document.getElementById('add-panel').style.display=S.addVisible?'block':'none';}
 
-function log(text, type = 'info') {
-  const bg = type==='hype'?'rgba(255,45,135,.09)':type==='skip'?'rgba(255,45,135,.14)':type==='request'?'rgba(0,245,255,.08)':type==='chill'?'rgba(139,92,246,.08)':type==='transition'?'rgba(255,140,0,.07)':'rgba(255,255,255,.03)';
-  const bc = (type==='hype'||type==='skip')?'#ff2d87':type==='request'?'#00f5ff':type==='chill'?'#8b5cf6':type==='transition'?'#ffb347':'rgba(255,255,255,.14)';
-  const t = new Date().toLocaleTimeString('en', { hour:'2-digit', minute:'2-digit' });
-  const div = document.createElement('div');
-  div.className = 'msg';
-  div.style.cssText = `background:${bg};border-left:2px solid ${bc};padding:5px 9px;border-radius:5px`;
-  div.innerHTML = `<span style="font-size:8px;color:rgba(255,255,255,.25);margin-right:8px">${t}</span><span style="font-size:11px">${text}</span>`;
-  const panel = document.getElementById('dj-log');
+function log(text,type='info'){
+  const bg=type==='hype'?'rgba(255,45,135,.09)':type==='skip'?'rgba(255,45,135,.14)':type==='request'?'rgba(0,245,255,.08)':type==='chill'?'rgba(139,92,246,.08)':type==='transition'?'rgba(255,140,0,.07)':'rgba(255,255,255,.03)';
+  const bc=(type==='hype'||type==='skip')?'#ff2d87':type==='request'?'#00f5ff':type==='chill'?'#8b5cf6':type==='transition'?'#ffb347':'rgba(255,255,255,.14)';
+  const t=new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement('div');
+  div.className='msg';
+  div.style.cssText=`background:${bg};border-left:2px solid ${bc};padding:5px 9px;border-radius:5px`;
+  div.innerHTML=`<span style="font-size:8px;color:rgba(255,255,255,.25);margin-right:8px">${t}</span><span style="font-size:11px">${text}</span>`;
+  const panel=document.getElementById('dj-log');
   panel.appendChild(div);
-  while (panel.children.length > 35) panel.removeChild(panel.firstChild);
-  div.scrollIntoView({ behavior: 'smooth' });
+  while(panel.children.length>35) panel.removeChild(panel.firstChild);
+  div.scrollIntoView({behavior:'smooth'});
 }
 
-// ════════════════════════════════════════════════════════════════
-//  AI DJ (optional)
-// ════════════════════════════════════════════════════════════════
-const CANNED = {
-  hype:       ["LET'S GO — we're RAMPING UP!", "DROPPING the heat — feel that energy!", "🔥 Energy surge incoming — hold on!"],
-  chill:      ["Easing it down... vibe shift.", "Bringing it smooth — breathe it in.", "Slowing the tempo, feel that."],
-  transition: ["Clean mix — next track locked in!", "MIXING IN — watch this crossfade.", "Seamless drop — you felt that!"],
-  skip:       ["CUTTING IN NOW — new vibe!", "Emergency mix — here we GO!", "Fast cut — next song in seconds!"],
-  request:    ["Request LOCKED IN —", "Bumping to the front:", "Your request — jumping the queue:"],
-};
-
-async function callDJ(prompt, type) {
-  document.getElementById('ai-dot').style.display = 'block';
-  document.getElementById('ai-lbl').style.display = 'inline';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': S.anthropicKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 1000,
-        system: "You are DJ Claude at an after-prom party. Max 2 punchy sentences. DJ slang: drops, crossfades, vibes, crowd. Start with: DROPPING..., MIXING..., LET'S GO..., FEEL THAT... Energy 1–10. Never break character.",
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const d = await res.json();
-    const text = d.content?.[0]?.text;
-    if (text) log(text, type);
-  } catch { log(CANNED[type]?.[0] || 'The vibes are electric!', type); }
-  document.getElementById('ai-dot').style.display = 'none';
-  document.getElementById('ai-lbl').style.display = 'none';
-}
-
-// ════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  UTILS
-// ════════════════════════════════════════════════════════════════
-async function rampVol(player, from, to, ms) {
-  const steps = 10, dt = ms / steps;
-  for (let i = 1; i <= steps; i++) {
-    player.setVolume(Math.round(from + (to - from) * (i / steps)));
-    await sleep(dt);
-  }
-}
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const fmt   = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-function extractId(url) {
-  const m = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
-  return m ? m[1] : null;
-}
+// ══════════════════════════════════════════════════════════
+async function rampVol(p,from,to,ms){const steps=10,dt=ms/steps;for(let i=1;i<=steps;i++){p.setVolume(Math.round(from+(to-from)*(i/steps)));await sleep(dt);}}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+function extractId(url){const m=url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
 </script>
 </body>
 </html>

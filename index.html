@@ -7,18 +7,14 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --pink:#ff2d87;--cyan:#00f5ff;--purple:#8b5cf6;--orange:#ff8c00;
-  --bg:#06060f;--surf:rgba(255,255,255,.04);--bord:rgba(255,255,255,.08);
-  --t:#d0d0ef;--td:rgba(255,255,255,.38);
-}
+:root{--pink:#ff2d87;--cyan:#00f5ff;--purple:#8b5cf6;--orange:#ff8c00;--green:#00ff88;--bg:#06060f;--surf:rgba(255,255,255,.04);--bord:rgba(255,255,255,.08);--t:#d0d0ef;--td:rgba(255,255,255,.38);}
 body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+body::before{content:'';position:fixed;inset:0;opacity:.5;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
 .orb{font-family:'Orbitron',monospace!important}
 .screen{display:none;min-height:100vh;padding:20px;position:relative;z-index:1}
 .screen.active{display:flex;flex-direction:column}
 #s-setup{align-items:center;justify-content:center}
-.card{background:var(--surf);border:1px solid var(--bord);border-radius:14px;padding:24px;backdrop-filter:blur(8px)}
+.card{background:var(--surf);border:1px solid var(--bord);border-radius:14px;padding:24px}
 .panel{background:var(--surf);border:1px solid var(--bord);border-radius:10px;padding:14px;position:relative}
 .ptitle{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,.28);text-transform:uppercase;margin-bottom:10px}
 .inp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:var(--t);font-family:'Share Tech Mono',monospace;font-size:13px;padding:11px 14px;outline:none;width:100%;transition:border-color .2s}
@@ -29,7 +25,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn:hover{filter:brightness(1.22);transform:scale(1.02)}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.32;cursor:not-allowed;transform:none!important;filter:none}
-.btn-pink{background:rgba(255,45,135,.2);color:var(--pink);border:1px solid rgba(255,45,135,.5);box-shadow:0 0 20px rgba(255,45,135,.12)}
+.btn-pink{background:rgba(255,45,135,.2);color:var(--pink);border:1px solid rgba(255,45,135,.5)}
 .vbtn{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:.8px;border:none;border-radius:8px;cursor:pointer;padding:12px 6px;transition:all .15s;text-transform:uppercase;width:100%;line-height:1.5}
 .vbtn:hover{transform:scale(1.04);filter:brightness(1.25)}
 .vbtn:active{transform:scale(.96)}
@@ -44,32 +40,32 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .qitem:hover{background:rgba(255,255,255,.05)}
 .edot{width:20px;height:20px;border-radius:50%;font-size:7px;font-family:'Orbitron',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .msg{padding:5px 9px;border-radius:5px;animation:fadeUp .3s ease}
-.vbar{background:linear-gradient(to top,var(--pink),var(--cyan));border-radius:2px 2px 0 0;flex:1;min-width:0}
 .logo{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;letter-spacing:6px;color:var(--pink);text-shadow:0 0 24px rgba(255,45,135,.55),0 0 48px rgba(255,45,135,.22)}
 .step-row{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .step-row:last-of-type{border-bottom:none}
 .badge{width:28px;height:28px;border-radius:50%;background:rgba(255,45,135,.18);border:1px solid rgba(255,45,135,.4);color:var(--pink);font-family:'Orbitron',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-a{color:var(--cyan);text-decoration:none}
-a:hover{text-decoration:underline}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
 .pill{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px}
 .pill-dot{width:5px;height:5px;border-radius:50%}
 .dj-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;flex:1;margin-bottom:11px;min-height:0}
-/* Dual-player stage */
-#yt-stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;margin-bottom:11px}
+#yt-stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;margin-bottom:8px}
 .yt-layer{position:absolute;inset:0;transition:opacity 8s ease}
 .yt-layer iframe,.yt-layer>div{width:100%!important;height:100%!important}
 #tx-strip{height:3px;width:100%;background:rgba(255,255,255,.08);border-radius:0 0 8px 8px;overflow:hidden;position:absolute;bottom:0;left:0}
-#tx-fill{height:100%;width:0%;transition:width 1s linear;border-radius:0 0 8px 8px}
-#stage-pulse{position:absolute;inset:0;border:3px solid var(--pink);border-radius:8px;opacity:0;pointer-events:none;transition:opacity .3s}
-/* Hype window indicator — overlaid on stage */
+#tx-fill{height:100%;width:0%;transition:width 1s linear}
+#stage-pulse{position:absolute;inset:0;border:3px solid var(--pink);border-radius:8px;opacity:0;pointer-events:none}
+#beat-flash{position:absolute;inset:0;background:var(--pink);border-radius:8px;opacity:0;pointer-events:none;transition:opacity .05s}
 #hype-bar{position:absolute;bottom:3px;left:0;right:0;height:4px;pointer-events:none}
-#hype-range{position:absolute;height:100%;background:rgba(0,245,255,.35);border-radius:2px}
-#hype-head{position:absolute;width:3px;height:100%;background:var(--cyan);border-radius:2px;transition:left .8s linear;box-shadow:0 0 6px var(--cyan)}
-/* Window tooltip */
-#window-info{font-family:'Orbitron',monospace;font-size:8px;color:rgba(255,255,255,.32);letter-spacing:1px;margin-bottom:6px;text-align:right}
+#hype-range{position:absolute;height:100%;background:rgba(0,245,255,.32);border-radius:2px}
+#hype-head{position:absolute;width:3px;height:100%;background:var(--cyan);border-radius:2px;box-shadow:0 0 5px var(--cyan)}
+#waveform-canvas{width:100%;height:44px;border-radius:6px;margin-bottom:6px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);display:block}
+#energy-meter{height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:7px}
+#energy-fill{height:100%;border-radius:2px;background:linear-gradient(to right,var(--purple),var(--pink));width:0%;transition:width .08s ease}
+#outro-warn{display:none;padding:5px 10px;border-radius:6px;background:rgba(255,140,0,.15);border:1px solid rgba(255,140,0,.4);font-family:'Orbitron',monospace;font-size:9px;color:var(--orange);letter-spacing:1px;margin-bottom:6px;text-align:center}
+#analysis-panel{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:8px;padding:10px 12px;margin-bottom:8px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes pumpRing{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.015);opacity:.3}}
+@keyframes pumpRing{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.015);opacity:.25}}
 .pulse-anim{animation:pulse 1.4s ease-in-out infinite}
 .ring-anim{animation:pumpRing .46s ease-in-out infinite}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:rgba(15,5,30,.95);border:1px solid var(--pink);color:var(--pink);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1px;padding:10px 20px;border-radius:8px;display:none;z-index:999}
@@ -77,150 +73,113 @@ a:hover{text-decoration:underline}
 </head>
 <body>
 
-<!-- ══════════ SETUP ══════════ -->
+<!-- ════ SETUP ════ -->
 <div id="s-setup" class="screen active">
   <div style="text-align:center;margin-bottom:28px">
     <div class="logo">DJ CLAUDE</div>
-    <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.26);margin-top:5px">AI DJ · ZERO SILENCE · HYPE CUTS ONLY</div>
+    <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.26);margin-top:5px">AI DJ · REAL WAVEFORM ANALYSIS · ZERO SILENCE</div>
   </div>
   <div class="card" style="max-width:540px;width:100%">
-    <p style="font-size:12px;color:var(--td);line-height:1.9;margin-bottom:20px">
-      Paste any YouTube playlist. The AI automatically skips intros, outros, and filler —
-      playing only the hype section of each song, mixed seamlessly into the next.
+    <p style="font-size:12px;color:var(--td);line-height:1.9;margin-bottom:18px">
+      Real Web Audio API frequency analysis. Detects actual beats, bass drops, and outros from the live audio — not guessing. Crossfades sync to detected beats.
     </p>
-
     <div class="step-row">
       <div class="badge">1</div>
       <div style="flex:1">
         <div style="font-size:13px;color:var(--t);margin-bottom:8px">YouTube playlist URL</div>
         <input class="inp" id="pl-url" placeholder="https://youtube.com/playlist?list=PL..." />
-        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:6px">Any public playlist, or a single video URL</div>
       </div>
     </div>
-
     <div class="step-row">
       <div class="badge">2</div>
       <div style="flex:1">
-        <div style="font-size:13px;color:var(--t);margin-bottom:4px">DJ aggressiveness</div>
-        <div style="font-size:11px;color:var(--td);margin-bottom:10px">How ruthlessly should the DJ cut filler?</div>
-        <div style="display:flex;gap:8px">
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="cut" value="chill" style="accent-color:var(--cyan)"> Chill (2–3 min/song)
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="cut" value="dj" checked style="accent-color:var(--pink)"> DJ Mode (1–2 min)
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="cut" value="hype" style="accent-color:var(--orange)"> Hype Beast (30–75s)
-          </label>
+        <div style="font-size:13px;color:var(--t);margin-bottom:4px">Cut aggression</div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="cut" value="chill" style="accent-color:var(--cyan)"> Chill (2–3 min)</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="cut" value="dj" checked style="accent-color:var(--pink)"> DJ (1–2 min)</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="cut" value="hype" style="accent-color:var(--orange)"> Hype Beast (30–75s)</label>
         </div>
       </div>
     </div>
-
     <div class="step-row">
       <div class="badge">3</div>
       <div style="flex:1">
-        <div style="font-size:13px;color:var(--t);margin-bottom:8px">
-          Transition style
-        </div>
-        <div style="display:flex;gap:8px">
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txs" value="pump" checked style="accent-color:var(--pink)"> Beat Pump
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txs" value="smooth" style="accent-color:var(--cyan)"> Smooth Fade
-          </label>
-          <label style="display:flex;align-items:center;gap=6px;font-size:11px;color:var(--td);cursor:pointer">
-            <input type="radio" name="txs" value="cut" style="accent-color:var(--orange)"> Hard Cut
-          </label>
+        <div style="font-size:13px;color:var(--t);margin-bottom:4px">Transition style</div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="txs" value="pump" checked style="accent-color:var(--pink)"> Beat Pump</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="txs" value="smooth" style="accent-color:var(--cyan)"> Smooth</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);cursor:pointer"><input type="radio" name="txs" value="cut" style="accent-color:var(--orange)"> Hard Cut</label>
         </div>
       </div>
     </div>
-
     <div class="step-row">
       <div class="badge">4</div>
       <div style="flex:1">
-        <div style="font-size:13px;color:var(--t);margin-bottom:8px">
-          AI DJ commentary <span style="font-size:10px;color:var(--td)">(optional)</span>
-        </div>
-        <input class="inp" id="ant-key" placeholder="sk-ant-api... (leave blank to skip)" />
-        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:6px">
-          Free at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — enables live DJ hype lines
-        </div>
+        <div style="font-size:13px;color:var(--t);margin-bottom:8px">AI DJ commentary <span style="font-size:10px;color:var(--td)">(optional)</span></div>
+        <input class="inp" id="ant-key" placeholder="sk-ant-api..." />
+        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:5px"><a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></div>
       </div>
     </div>
-
-    <button class="btn btn-pink" style="width:100%;padding:16px;font-size:13px;margin-top:8px" onclick="init()">
-      🎧 FIRE UP THE SET
-    </button>
+    <button class="btn btn-pink" style="width:100%;padding:16px;font-size:13px;margin-top:8px" onclick="init()">🎧 FIRE UP THE SET</button>
   </div>
 </div>
 
-<!-- ══════════ DJ SCREEN ══════════ -->
+<!-- ════ DJ SCREEN ════ -->
 <div id="s-dj" class="screen">
   <div style="text-align:center;margin-bottom:12px">
     <div class="logo" style="font-size:19px;letter-spacing:5px">DJ CLAUDE</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:5px">
+    <div style="display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:5px">
       <div id="cut-badge" style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1.5px;padding:2px 9px;border-radius:10px;background:rgba(255,45,135,.12);border:1px solid rgba(255,45,135,.3);color:var(--pink)">DJ MODE</div>
-      <div id="status-pill" class="pill" style="background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.25);color:var(--cyan)">
-        <div class="pill-dot" style="background:var(--cyan)"></div><span>READY</span>
-      </div>
+      <div id="status-pill" class="pill" style="background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.25);color:var(--cyan)"><div class="pill-dot" style="background:var(--cyan)"></div><span>READY</span></div>
+      <button id="wav-btn" onclick="enableAudio()" style="font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:10px;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.35);color:var(--green);cursor:pointer;transition:all .2s">◎ ENABLE WAVEFORM ANALYSIS</button>
     </div>
   </div>
 
   <div class="dj-grid">
 
-    <!-- ── Col 1: Now Playing ── -->
+    <!-- Col 1: Now Playing -->
     <div class="panel" style="display:flex;flex-direction:column">
       <div class="ptitle">NOW PLAYING</div>
-
       <div id="yt-stage">
         <div id="layer-a" class="yt-layer" style="opacity:1;z-index:2"><div id="yt-a"></div></div>
         <div id="layer-b" class="yt-layer" style="opacity:0;z-index:1"><div id="yt-b"></div></div>
         <div id="stage-pulse"></div>
+        <div id="beat-flash"></div>
         <div id="hype-bar"><div id="hype-range"></div><div id="hype-head"></div></div>
         <div id="tx-strip"><div id="tx-fill"></div></div>
       </div>
-
-      <div id="window-info">window: --:-- → --:--</div>
-
-      <div id="tx-badge" style="display:none;margin-bottom:6px">
-        <span id="tx-badge-txt" class="pill pulse-anim" style="font-size:8px;padding:3px 10px"></span>
-      </div>
-
+      <canvas id="waveform-canvas" height="44"></canvas>
+      <div id="energy-meter"><div id="energy-fill"></div></div>
+      <div id="outro-warn" class="pulse-anim">⚠ OUTRO DETECTED — MIXING NEXT TRACK</div>
+      <div id="tx-badge" style="display:none;margin-bottom:6px"><span id="tx-badge-txt" class="pill pulse-anim" style="font-size:8px;padding:3px 10px"></span></div>
       <div style="margin-bottom:8px;flex:1;min-height:0">
         <div id="tr-title" class="orb" style="font-size:12px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Press play to start</div>
         <div id="tr-artist" style="font-size:10px;color:var(--td)">---</div>
-        <div id="tr-nrg" style="font-size:9px;color:var(--pink);margin-top:2px"></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:3px">
+          <div id="tr-nrg" style="font-size:9px;color:var(--pink)"></div>
+          <div id="beat-dot" style="display:none;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);transition:transform .05s,opacity .05s"></div>
+          <div id="beat-bpm" style="display:none;font-size:8px;color:var(--green);font-family:'Orbitron',monospace;letter-spacing:1px"></div>
+        </div>
       </div>
-
-      <!-- Progress inside the hype window -->
       <div style="margin-bottom:9px">
         <div style="background:rgba(255,255,255,.1);border-radius:2px;height:3px;margin-bottom:4px;overflow:hidden">
           <div id="prog" style="height:100%;border-radius:2px;background:var(--pink);width:0%;transition:width .9s linear;box-shadow:0 0 8px var(--pink)"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,.3)">
-          <span id="t-cur">0:00</span>
-          <span id="t-window" style="color:rgba(255,255,255,.2)">window</span>
-          <span id="t-end">0:00</span>
+          <span id="t-cur">0:00</span><span id="t-window" style="color:rgba(255,255,255,.2)">window</span><span id="t-end">0:00</span>
         </div>
       </div>
-
-      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px;align-items:center">
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:6px;align-items:center">
         <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
-        <div style="font-size:9px;color:rgba(255,255,255,.25);line-height:1.6">
+        <div style="font-size:9px;color:rgba(255,255,255,.25);line-height:1.7">
           Vol: <span id="vol-num">85</span>%<br>
-          <input type="range" id="vol-slider" min="0" max="100" value="85"
-            oninput="setVol(this.value)" style="width:70px;accent-color:var(--cyan);cursor:pointer">
+          <input type="range" id="vol-slider" min="0" max="100" value="85" oninput="setVol(this.value)" style="width:70px;accent-color:var(--cyan);cursor:pointer">
         </div>
       </div>
-
-      <div id="viz" style="display:flex;align-items:flex-end;height:34px;gap:2px"></div>
     </div>
 
-    <!-- ── Col 2: Energy + Controls ── -->
+    <!-- Col 2: Energy + Controls -->
     <div style="display:flex;flex-direction:column;gap:11px">
-
       <div class="panel">
         <div class="ptitle">ENERGY LEVEL</div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
@@ -228,16 +187,24 @@ a:hover{text-decoration:underline}
           <div style="flex:1">
             <div id="e-lbl" style="font-size:9px;color:var(--td);margin-bottom:5px;letter-spacing:1px">HIGH ENERGY</div>
             <div style="background:rgba(255,255,255,.1);border-radius:4px;height:8px;overflow:hidden">
-              <div id="e-bar" style="height:100%;border-radius:4px;background:linear-gradient(to right,var(--purple),var(--orange));width:70%;transition:width .5s,background .5s;box-shadow:0 0 10px var(--orange)"></div>
+              <div id="e-bar" style="height:100%;border-radius:4px;background:linear-gradient(to right,var(--purple),var(--orange));width:70%;transition:width .5s;box-shadow:0 0 10px var(--orange)"></div>
             </div>
           </div>
+        </div>
+        <div id="analysis-panel">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:9px;font-family:'Orbitron',monospace;letter-spacing:.8px">
+            <div style="color:rgba(255,255,255,.28)">AUDIO RMS</div><div id="rms-val" style="color:var(--green);text-align:right">--</div>
+            <div style="color:rgba(255,255,255,.28)">BASS</div><div id="bass-val" style="color:var(--green);text-align:right">--</div>
+            <div style="color:rgba(255,255,255,.28)">BPM</div><div id="bpm-val" style="color:var(--green);text-align:right">--</div>
+            <div style="color:rgba(255,255,255,.28)">OUTRO RISK</div><div id="outro-val" style="color:var(--green);text-align:right">--</div>
+          </div>
+          <div id="wav-status" style="font-family:'Orbitron',monospace;font-size:8px;color:rgba(0,255,136,.35);letter-spacing:1px;margin-top:8px;text-align:center">◎ WAVEFORM OFFLINE — USING HEURISTICS</div>
         </div>
         <div style="display:flex;align-items:center;gap:7px;font-size:9px;color:rgba(255,255,255,.28);font-family:'Orbitron',monospace;letter-spacing:.8px">
           <div id="preload-dot" style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .4s"></div>
           <span id="preload-lbl">Next: idle</span>
         </div>
       </div>
-
       <div class="panel" style="flex:1">
         <div class="ptitle">VIBE CONTROLS</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
@@ -246,745 +213,575 @@ a:hover{text-decoration:underline}
           <button class="vbtn" style="background:rgba(255,140,0,.11);color:#ffb347;border:1px solid rgba(255,140,0,.32)" onclick="changeEnergy(Math.min(10,S.energy+2))">▲<br>Turn It Up</button>
           <button class="vbtn" style="background:rgba(255,45,135,.16);color:var(--pink);border:1px solid rgba(255,45,135,.38)" onclick="changeEnergy(10)">🔥<br>Drop It</button>
         </div>
-        <button class="skip-btn" id="skip-btn" onclick="handleSkip()">⚡ SKIP NOW — INSTANT MIX</button>
-
+        <button class="skip-btn" id="skip-btn" onclick="handleSkip()">⚡ SKIP NOW</button>
         <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
           <div class="ptitle" style="margin-bottom:7px">TRANSITION</div>
-          <div style="display:flex;gap:6px">
-            <button onclick="setTxStyle('pump')"   id="ts-pump"   class="sm-btn" style="flex:1;font-size:8px">PUMP</button>
-            <button onclick="setTxStyle('smooth')" id="ts-smooth" class="sm-btn" style="flex:1;font-size:8px">SMOOTH</button>
-            <button onclick="setTxStyle('cut')"    id="ts-cut"    class="sm-btn" style="flex:1;font-size:8px">CUT</button>
+          <div style="display:flex;gap:6px;margin-bottom:8px">
+            <button onclick="setTx('pump')"   id="ts-pump"   class="sm-btn" style="flex:1;font-size:8px">PUMP</button>
+            <button onclick="setTx('smooth')" id="ts-smooth" class="sm-btn" style="flex:1;font-size:8px">SMOOTH</button>
+            <button onclick="setTx('cut')"    id="ts-cut"    class="sm-btn" style="flex:1;font-size:8px">CUT</button>
           </div>
-          <div style="margin-top:10px">
-            <div class="ptitle" style="margin-bottom:7px">CUT AGGRESSION</div>
-            <div style="display:flex;gap:6px">
-              <button onclick="setCutMode('chill')" id="cm-chill" class="sm-btn" style="flex:1;font-size:8px">CHILL</button>
-              <button onclick="setCutMode('dj')"    id="cm-dj"    class="sm-btn" style="flex:1;font-size:8px">DJ</button>
-              <button onclick="setCutMode('hype')"  id="cm-hype"  class="sm-btn" style="flex:1;font-size:8px">BEAST</button>
-            </div>
+          <div class="ptitle" style="margin-bottom:7px">CUT MODE</div>
+          <div style="display:flex;gap:6px">
+            <button onclick="setCut('chill')" id="cm-chill" class="sm-btn" style="flex:1;font-size:8px">CHILL</button>
+            <button onclick="setCut('dj')"    id="cm-dj"    class="sm-btn" style="flex:1;font-size:8px">DJ</button>
+            <button onclick="setCut('hype')"  id="cm-hype"  class="sm-btn" style="flex:1;font-size:8px">BEAST</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── Col 3: Queue + Requests ── -->
+    <!-- Col 3: Queue + Requests -->
     <div class="panel" style="display:flex;flex-direction:column">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <div class="ptitle" style="margin:0">UP NEXT</div>
         <button onclick="toggleAdd()" style="background:none;border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.42);border-radius:4px;cursor:pointer;font-size:9px;padding:3px 8px;font-family:'Orbitron',monospace;letter-spacing:1px">+ ADD</button>
       </div>
-
       <div id="add-panel" style="display:none;margin-bottom:10px">
-        <input class="inp inp-sm" id="add-inp" placeholder="Paste YouTube video URL..." onkeydown="if(event.key==='Enter')addSong()" style="margin-bottom:6px" />
+        <input class="inp inp-sm" id="add-inp" placeholder="YouTube video URL..." onkeydown="if(event.key==='Enter')addSong()" style="margin-bottom:6px" />
         <div style="display:flex;gap:6px">
           <button class="sm-btn" style="flex:1" onclick="addSong()">ADD TO QUEUE</button>
-          <a href="https://youtube.com" target="_blank">
-            <button class="sm-btn" style="background:rgba(255,45,135,.1);border-color:rgba(255,45,135,.3);color:var(--pink)">YT ↗</button>
-          </a>
+          <a href="https://youtube.com" target="_blank"><button class="sm-btn" style="background:rgba(255,45,135,.1);border-color:rgba(255,45,135,.3);color:var(--pink)">YT ↗</button></a>
         </div>
       </div>
-
       <div id="q-list" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;min-height:0;max-height:230px;margin-bottom:12px">
         <div style="font-size:10px;color:rgba(255,255,255,.22);padding:8px 0">Loading playlist...</div>
       </div>
-
       <div>
         <div class="ptitle">REQUEST A SONG</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.24);margin-bottom:7px;line-height:1.5">Paste a YouTube URL — bumped to front + pre-loaded</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.24);margin-bottom:7px">Paste YouTube URL — bumps to front</div>
         <div style="display:flex;gap:6px">
           <input class="inp inp-sm" id="req-inp" placeholder="youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')handleRequest()" style="flex:1" />
           <button class="sm-btn" onclick="handleRequest()">SEND</button>
         </div>
-        <div style="text-align:right;margin-top:5px">
-          <a href="https://youtube.com" target="_blank" style="font-size:9px;color:rgba(255,255,255,.22)">Find on YouTube ↗</a>
-        </div>
+        <div style="text-align:right;margin-top:5px"><a href="https://youtube.com" target="_blank" style="font-size:9px;color:rgba(255,255,255,.22)">Find on YouTube ↗</a></div>
       </div>
     </div>
   </div>
 
-  <!-- DJ Log -->
   <div class="panel">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
       <div class="ptitle" style="margin:0">DJ LOG</div>
-      <div id="ai-dot"  style="display:none;width:6px;height:6px;border-radius:50%;background:var(--cyan)" class="pulse-anim"></div>
+      <div id="ai-dot" style="display:none;width:6px;height:6px;border-radius:50%;background:var(--cyan)" class="pulse-anim"></div>
       <span id="ai-lbl" style="display:none;font-family:'Orbitron',monospace;font-size:8px;color:var(--cyan);letter-spacing:2px" class="pulse-anim">CLAUDE THINKING...</span>
     </div>
-    <div id="dj-log" style="overflow-y:auto;max-height:88px;display:flex;flex-direction:column;gap:3px">
-      <div style="font-size:11px;color:rgba(255,255,255,.2);padding:4px 0;font-style:italic">Initializing smart DJ engine...</div>
+    <div id="dj-log" style="overflow-y:auto;max-height:80px;display:flex;flex-direction:column;gap:3px">
+      <div style="font-size:11px;color:rgba(255,255,255,.2);padding:4px 0;font-style:italic">Waveform analysis engine initializing...</div>
     </div>
   </div>
-
   <div style="text-align:center;margin-top:8px;font-size:8px;color:rgba(255,255,255,.14);font-family:'Orbitron',monospace;letter-spacing:1px">
-    SMART HYPE CUTS · DUAL-PLAYER CROSSFADE · ZERO SILENCE
+    FFT BEAT DETECTION · OUTRO SENSING · BEAT-SYNCED CROSSFADES · ZERO SILENCE
   </div>
 </div>
 
 <div id="toast"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// ══════════════════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════════════════
-const S = {
-  tracks:[], queue:[], played:[],
-  current:null, currentWindow:null,   // {startAt, endAt, duration}
-  energy:7,
-  volume:85,
-  txStyle:'pump',
-  cutMode:'dj',   // 'chill' | 'dj' | 'hype'
-  pA:null, pB:null,
-  aReady:false, bReady:false,
-  active:'A',
-  preloaded:false, preloadTrack:null, preloadWindow:null,
-  inTransition:false, txPending:false,
-  playing:false,
-  addVisible:false,
-  anthropicKey:'',
-  ytApiReady:false, ytCbs:[],
-  pollTimer:null, vizTimer:null, txTimer:null,
+const S={
+  tracks:[],queue:[],played:[],current:null,currentWindow:null,
+  energy:7,volume:85,txStyle:'pump',cutMode:'dj',
+  pA:null,pB:null,aReady:false,bReady:false,active:'A',
+  preloaded:false,preloadTrack:null,preloadWindow:null,
+  inTransition:false,txPending:false,playing:false,addVisible:false,
+  anthropicKey:'',ytApiReady:false,ytCbs:[],
+  pollTimer:null,txTimer:null,
+  // Audio analysis
+  audioCtx:null,analyser:null,freqData:null,timeData:null,audioReady:false,
+  rmsHistory:[],bassHistory:[],beatTimes:[],lastBeatTime:0,estimatedBPM:0,
+  outroVotes:0,outroTriggered:false,beatWaiting:false,beatWaitCb:null,
+  waveCtx:null,
 };
 
-// ══════════════════════════════════════════════════════════
-//  SMART HYPE WINDOW ENGINE
-//
-//  For each track we compute:
-//    startAt  — where to seek in (skip intro/quiet build)
-//    endAt    — where to cut out (before outro/fade)
-//    The window is [startAt, endAt]
-//
-//  Rules vary by energy AND cutMode.
-// ══════════════════════════════════════════════════════════
-function calcWindow(track, totalDur) {
-  const e = track.energy;
-  const d = totalDur || 210;
-
-  // Base play duration by cutMode
-  let playDur;
-  if (S.cutMode === 'hype') {
-    playDur = e >= 9 ? rnd(30,55) : e >= 7 ? rnd(45,70) : e >= 5 ? rnd(55,80) : rnd(65,90);
-  } else if (S.cutMode === 'dj') {
-    playDur = e >= 9 ? rnd(55,85) : e >= 7 ? rnd(70,100) : e >= 5 ? rnd(85,115) : rnd(100,135);
-  } else { // chill
-    playDur = e >= 9 ? rnd(100,145) : e >= 7 ? rnd(120,165) : e >= 5 ? rnd(140,185) : rnd(155,200);
+// ── WAVEFORM ANALYSIS ──────────────────────────────────────────────
+async function enableAudio(){
+  const btn=document.getElementById('wav-btn');
+  btn.textContent='◎ REQUESTING...';
+  try{
+    // Capture tab audio via getDisplayMedia
+    // User must select "This Tab" (Chrome) or "Browser Tab" in the share dialog
+    const stream=await navigator.mediaDevices.getDisplayMedia({
+      video:{width:1,height:1,frameRate:1},
+      audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}
+    });
+    const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    const src=audioCtx.createMediaStreamSource(stream);
+    const analyser=audioCtx.createAnalyser();
+    analyser.fftSize=2048;
+    analyser.smoothingTimeConstant=0.82;
+    analyser.minDecibels=-90;
+    analyser.maxDecibels=-10;
+    src.connect(analyser);
+    // NOTE: NOT connecting to audioCtx.destination — avoids doubling the audio
+    S.audioCtx=audioCtx;S.analyser=analyser;
+    S.freqData=new Uint8Array(analyser.frequencyBinCount);
+    S.timeData=new Uint8Array(analyser.frequencyBinCount);
+    S.audioReady=true;
+    S.waveCtx=document.getElementById('waveform-canvas').getContext('2d');
+    stream.getVideoTracks().forEach(t=>t.stop()); // drop the video track, keep audio
+    btn.textContent='◉ WAVEFORM ACTIVE';
+    btn.style.background='rgba(0,255,136,.2)';btn.style.borderColor='rgba(0,255,136,.5)';
+    document.getElementById('wav-status').textContent='◉ WAVEFORM ANALYSIS ACTIVE — BEAT SYNC ON';
+    document.getElementById('wav-status').style.color='var(--green)';
+    document.getElementById('beat-dot').style.display='block';
+    document.getElementById('beat-bpm').style.display='block';
+    log('🎛 Waveform analysis LIVE — real beat detection + outro sensing enabled','hype');
+    runAnalysisLoop();
+  }catch(e){
+    btn.textContent='◎ ENABLE WAVEFORM ANALYSIS';
+    log('⚠ Audio capture unavailable — using smart heuristics','info');
   }
-
-  // How much intro to skip (land on verse/chorus/drop)
-  let skipIntro;
-  if (e >= 9)      skipIntro = rnd(18, 32); // skip long DJ-style intros, land right on drop
-  else if (e >= 7) skipIntro = rnd(12, 24);
-  else if (e >= 5) skipIntro = rnd(8,  18);
-  else if (e >= 3) skipIntro = rnd(4,  12);
-  else             skipIntro = rnd(2,   8);
-
-  // For chill mode, be gentler with the intro skip
-  if (S.cutMode === 'chill') skipIntro = Math.floor(skipIntro * 0.5);
-
-  // Don't start past 40% of the song
-  const startAt = Math.min(skipIntro, d * 0.38);
-
-  // Ensure endAt doesn't exceed song
-  const endAt = Math.min(startAt + playDur, d - 4);
-
-  // Clamp: at least 20s of play
-  const actualEnd = Math.max(endAt, startAt + 20);
-
-  return { startAt: Math.floor(startAt), endAt: Math.floor(actualEnd) };
 }
 
-// ══════════════════════════════════════════════════════════
-//  YT API
-// ══════════════════════════════════════════════════════════
-function onYouTubeIframeAPIReady() {
-  S.ytApiReady = true;
-  S.ytCbs.forEach(f => f());
-  S.ytCbs = [];
+function runAnalysisLoop(){
+  const SR=S.audioCtx.sampleRate, BS=SR/S.analyser.fftSize;
+  const bassStart=Math.floor(40/BS),bassEnd=Math.floor(250/BS);
+  function loop(){
+    if(!S.audioReady){return;}
+    requestAnimationFrame(loop);
+    S.analyser.getByteFrequencyData(S.freqData);
+    S.analyser.getByteTimeDomainData(S.timeData);
+    // RMS
+    let sq=0;
+    for(let i=0;i<S.timeData.length;i++){const v=(S.timeData[i]-128)/128;sq+=v*v;}
+    const rms=Math.sqrt(sq/S.timeData.length);
+    // Bass energy
+    let bSum=0;
+    for(let i=bassStart;i<bassEnd;i++) bSum+=S.freqData[i];
+    const bass=bSum/((bassEnd-bassStart)*255);
+    // Rolling history
+    S.rmsHistory.push(rms); if(S.rmsHistory.length>180) S.rmsHistory.shift();
+    S.bassHistory.push(bass); if(S.bassHistory.length>60) S.bassHistory.shift();
+    const avgBass=avg(S.bassHistory.slice(-30));
+    // Beat detection
+    const beat=detectBeat(bass,avgBass);
+    if(beat) onBeat(bass);
+    const bpm=calcBPM();
+    // Outro detection
+    checkOutro(rms);
+    // UI
+    document.getElementById('rms-val').textContent=(rms*100).toFixed(1)+'%';
+    document.getElementById('bass-val').textContent=(bass*100).toFixed(1)+'%';
+    document.getElementById('bpm-val').textContent=bpm?bpm+' BPM':'--';
+    const risk=Math.min(100,Math.round((S.outroVotes/45)*100));
+    const ov=document.getElementById('outro-val');
+    ov.textContent=risk+'%';
+    ov.style.color=risk>70?'var(--orange)':risk>40?'#ffb347':'var(--green)';
+    document.getElementById('energy-fill').style.width=(rms*500)+'%';
+    drawWave(beat);
+  }
+  loop();
 }
-function whenYT(cb) { S.ytApiReady ? cb() : S.ytCbs.push(cb); }
-function liveP()    { return S.active === 'A' ? S.pA : S.pB; }
-function stagingP() { return S.active === 'A' ? S.pB : S.pA; }
-function swapActive() {
-  S.active = S.active === 'A' ? 'B' : 'A';
-  document.getElementById('layer-a').style.opacity = S.active === 'A' ? '1' : '0';
-  document.getElementById('layer-a').style.zIndex  = S.active === 'A' ? '2' : '1';
-  document.getElementById('layer-b').style.opacity = S.active === 'B' ? '1' : '0';
-  document.getElementById('layer-b').style.zIndex  = S.active === 'B' ? '2' : '1';
+
+function detectBeat(bass,avgBass){
+  if(!S.playing) return false;
+  const now=Date.now();
+  if(now-S.lastBeatTime<280) return false;
+  if(avgBass<0.02) return false;
+  return bass>avgBass*1.38&&bass>0.08;
 }
 
-// ══════════════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════════════
-function init() {
-  const url = document.getElementById('pl-url').value.trim();
-  S.anthropicKey = document.getElementById('ant-key').value.trim();
-  S.txStyle  = document.querySelector('input[name="txs"]:checked')?.value  || 'pump';
-  S.cutMode  = document.querySelector('input[name="cut"]:checked')?.value  || 'dj';
+function onBeat(bass){
+  const now=Date.now();
+  S.lastBeatTime=now;
+  S.beatTimes.push(now);
+  if(S.beatTimes.length>16) S.beatTimes.shift();
+  const dot=document.getElementById('beat-dot');
+  dot.style.transform='scale(1.7)';dot.style.opacity='1';
+  setTimeout(()=>{dot.style.transform='scale(1)';dot.style.opacity='.6';},80);
+  if(bass>0.22){const f=document.getElementById('beat-flash');f.style.opacity='0.06';setTimeout(()=>f.style.opacity='0',80);}
+  if(S.beatWaiting&&S.beatWaitCb){S.beatWaiting=false;const cb=S.beatWaitCb;S.beatWaitCb=null;cb();}
+}
 
-  if (!url) { showToast('Paste a YouTube URL first!'); return; }
-  const plMatch  = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
-  const vidMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if (!plMatch && !vidMatch) { showToast('Not a valid YouTube URL'); return; }
+function calcBPM(){
+  if(S.beatTimes.length<4) return 0;
+  const intervals=[];
+  for(let i=1;i<S.beatTimes.length;i++) intervals.push(S.beatTimes[i]-S.beatTimes[i-1]);
+  const med=intervals.sort((a,b)=>a-b)[Math.floor(intervals.length/2)];
+  if(med<200||med>2000) return 0;
+  const bpm=Math.round(60000/med);
+  S.estimatedBPM=bpm;
+  document.getElementById('beat-bpm').textContent=bpm+' BPM';
+  return bpm;
+}
 
-  showScreen('dj');
-  updateCutBadge();
-  updateTxStyleUI();
-  updateCutUI();
-
-  whenYT(() => {
-    const base = { autoplay:0, controls:1, rel:0, modestbranding:1, iv_load_policy:3 };
-    const cfgA = {
-      width:'100%', height:'100%',
-      playerVars:{ ...base },
-      events:{
-        onReady: () => { S.aReady=true; onBothReady(); },
-        onStateChange: e => onStateChange(e,'A'),
-        onError: () => onPlayerError('A')
+function checkOutro(rms){
+  if(!S.playing||S.inTransition||!S.currentWindow) return;
+  try{
+    const cur=liveP()?.getCurrentTime()||0;
+    const intoWin=cur-S.currentWindow.startAt;
+    const rem=S.currentWindow.endAt-cur;
+    if(intoWin<20||rem>60||rem<5) return;
+    const peak=Math.max(...S.rmsHistory,0.01);
+    const curAvg=avg(S.rmsHistory.slice(-30));
+    if(peak>0&&curAvg/peak<0.35){
+      S.outroVotes++;
+      if(S.outroVotes>=45&&!S.outroTriggered&&!S.txPending){
+        S.outroTriggered=true;
+        document.getElementById('outro-warn').style.display='block';
+        log('🎚 Outro detected via waveform — mixing early','transition');
+        setTimeout(()=>{document.getElementById('outro-warn').style.display='none';S.txPending=true;doTx('outro');},1200);
       }
-    };
-    const cfgB = {
-      width:'100%', height:'100%',
-      playerVars:{ ...base },
-      events:{
-        onReady: () => { S.bReady=true; onBothReady(); },
-        onStateChange: e => onStateChange(e,'B'),
-        onError: () => onPlayerError('B')
-      }
-    };
-    if (plMatch) { cfgA.playerVars.list = plMatch[1]; cfgA.playerVars.listType = 'playlist'; }
-    else if (vidMatch) cfgA.videoId = vidMatch[1];
-
-    S.pA = new YT.Player('yt-a', cfgA);
-    S.pB = new YT.Player('yt-b', cfgB);
-
-    if (plMatch) {
-      setTimeout(async () => {
-        const ids = S.pA.getPlaylist?.() || [];
-        if (ids.length > 0) {
-          log('⟳ Loading ' + ids.length + ' tracks...', 'info');
-          await loadMeta(ids.slice(0, 80));
-          buildQ(S.energy);
-          renderQ();
-          log('✅ ' + S.tracks.length + ' tracks loaded — press ▶ to start!', 'hype');
-        } else {
-          setTimeout(async () => {
-            const ids2 = S.pA.getPlaylist?.() || [];
-            if (ids2.length > 0) {
-              await loadMeta(ids2.slice(0, 80));
-              buildQ(S.energy); renderQ();
-              log('✅ Ready — press ▶!', 'hype');
-            }
-          }, 3000);
-        }
-      }, 2500);
+    } else {
+      S.outroVotes=Math.max(0,S.outroVotes-2);
+      if(S.outroVotes===0) S.outroTriggered=false;
     }
-    buildViz();
+  }catch{}
+}
+
+function waitBeat(ms=2000){
+  return new Promise(r=>{
+    if(!S.audioReady){r();return;}
+    S.beatWaiting=true;S.beatWaitCb=r;
+    setTimeout(()=>{if(S.beatWaiting){S.beatWaiting=false;S.beatWaitCb=null;r();}},ms);
+  });
+}
+
+function drawWave(isBeat){
+  const canvas=document.getElementById('waveform-canvas');
+  const ctx=S.waveCtx;if(!ctx) return;
+  canvas.width=canvas.offsetWidth*devicePixelRatio;
+  canvas.height=canvas.offsetHeight*devicePixelRatio;
+  ctx.scale(devicePixelRatio,devicePixelRatio);
+  const W=canvas.offsetWidth,H=canvas.offsetHeight;
+  ctx.clearRect(0,0,W,H);
+  const bins=Math.min(S.freqData.length/2,180),bw=W/bins;
+  for(let i=0;i<bins;i++){
+    const v=S.freqData[i]/255,bh=v*H;
+    const hue=isBeat?200+i*.8:280+i*.6;
+    ctx.fillStyle=`hsla(${hue},100%,65%,${0.7+v*.3})`;
+    ctx.fillRect(i*bw,H-bh,bw-.5,bh);
+  }
+  if(isBeat){ctx.fillStyle='rgba(255,45,135,0.1)';ctx.fillRect(0,0,W,H);}
+}
+
+// ── YT API ────────────────────────────────────────────────────────
+function onYouTubeIframeAPIReady(){S.ytApiReady=true;S.ytCbs.forEach(f=>f());S.ytCbs=[];}
+function whenYT(cb){S.ytApiReady?cb():S.ytCbs.push(cb);}
+function liveP(){return S.active==='A'?S.pA:S.pB;}
+function stagingP(){return S.active==='A'?S.pB:S.pA;}
+function swapActive(){
+  S.active=S.active==='A'?'B':'A';
+  const la=document.getElementById('layer-a'),lb=document.getElementById('layer-b');
+  la.style.opacity=S.active==='A'?'1':'0';la.style.zIndex=S.active==='A'?'2':'1';
+  lb.style.opacity=S.active==='B'?'1':'0';lb.style.zIndex=S.active==='B'?'2':'1';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+function init(){
+  const url=document.getElementById('pl-url').value.trim();
+  S.anthropicKey=document.getElementById('ant-key').value.trim();
+  S.txStyle=document.querySelector('input[name="txs"]:checked')?.value||'pump';
+  S.cutMode=document.querySelector('input[name="cut"]:checked')?.value||'dj';
+  if(!url){showToast('Paste a YouTube URL first!');return;}
+  const plM=url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  const viM=url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if(!plM&&!viM){showToast('Not a valid YouTube URL');return;}
+  showScreen('dj');updateCutBadge();updateTxUI();updateCutUI();
+  whenYT(()=>{
+    const base={autoplay:0,controls:1,rel:0,modestbranding:1,iv_load_policy:3};
+    const plVars=plM?{...base,list:plM[1],listType:'playlist'}:base;
+    S.pA=new YT.Player('yt-a',{width:'100%',height:'100%',playerVars:plVars,
+      events:{onReady:()=>{S.aReady=true;bothReady();},onStateChange:e=>sc(e,'A'),onError:()=>err('A')}});
+    S.pB=new YT.Player('yt-b',{width:'100%',height:'100%',playerVars:base,
+      events:{onReady:()=>{S.bReady=true;bothReady();},onStateChange:e=>sc(e,'B'),onError:()=>err('B')}});
+    setTimeout(async()=>{
+      const ids=S.pA.getPlaylist?.()??[];
+      if(ids.length){log('⟳ Loading '+ids.length+' tracks...','info');await loadMeta(ids.slice(0,80));buildQ(S.energy);renderQ();log('✅ '+S.tracks.length+' tracks — press ▶ then enable Waveform Analysis!','hype');}
+      else setTimeout(async()=>{const i2=S.pA.getPlaylist?.()??[];if(i2.length){await loadMeta(i2.slice(0,80));buildQ(S.energy);renderQ();log('✅ Ready!','hype');}},3000);
+    },2500);
     startPoll();
   });
 }
 
-function onBothReady() {
-  if (!S.aReady || !S.bReady) return;
-  S.pA.setVolume(S.volume);
-  S.pB.setVolume(0);
-  setStatus('READY', 'cyan');
-  if (S.anthropicKey) callDJ('AI DJ set starting. Hype intro, max 2 sentences.','hype');
-  else log('🎧 Smart DJ engine ready. Press ▶ to start!','hype');
+function bothReady(){
+  if(!S.aReady||!S.bReady) return;
+  S.pA.setVolume(S.volume);S.pB.setVolume(0);setStatus('READY','cyan');
+  if(S.anthropicKey) callDJ('DJ set starting. Hype intro, 2 sentences.','hype');
+  else log('🎧 Engine ready. Press ▶ then click "Enable Waveform Analysis" for beat sync!','hype');
 }
 
-// ══════════════════════════════════════════════════════════
-//  METADATA
-// ══════════════════════════════════════════════════════════
-async function loadMeta(ids) {
-  for (let i=0; i<ids.length; i+=6) {
-    await Promise.all(ids.slice(i,i+6).map(fetchOEmbed));
-    if (i+6<ids.length) await sleep(90);
-  }
+// ── METADATA ──────────────────────────────────────────────────────
+async function loadMeta(ids){for(let i=0;i<ids.length;i+=6){await Promise.all(ids.slice(i,i+6).map(fetchOE));if(i+6<ids.length)await sl(90);}}
+async function fetchOE(id){
+  try{const r=await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);if(!r.ok)throw 0;const d=await r.json();up({id,title:d.title||'Track',artist:d.author_name||'YouTube',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:estE(d.title||'',d.author_name||'')});}
+  catch{up({id,title:'Track',artist:'YouTube',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:6});}
 }
-async function fetchOEmbed(id) {
-  try {
-    const r = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
-    if (!r.ok) throw 0;
-    const d = await r.json();
-    upsert({ id, title:d.title||'Track', artist:d.author_name||'YouTube',
-      thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,
-      energy:estimateEnergy(d.title||'',d.author_name||'') });
-  } catch {
-    upsert({ id, title:'Track', artist:'YouTube',
-      thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`, energy:6 });
-  }
-}
-function upsert(t) {
-  const i = S.tracks.findIndex(x=>x.id===t.id);
-  if (i>=0) Object.assign(S.tracks[i],t); else S.tracks.push(t);
-}
+function up(t){const i=S.tracks.findIndex(x=>x.id===t.id);if(i>=0)Object.assign(S.tracks[i],t);else S.tracks.push(t);}
 
-// ══════════════════════════════════════════════════════════
-//  ENERGY ESTIMATION
-// ══════════════════════════════════════════════════════════
-function estimateEnergy(title, artist) {
+// ── ENERGY ESTIMATION ─────────────────────────────────────────────
+function estE(title,artist){
   const s=(title+' '+artist).toLowerCase();
-  if (/slow\s*danc|ballad|lullaby|unplugged|acoustic|someone\s*like\s*you|let\s*her\s*go|see\s*you\s*again|fix\s*you|skinny\s*love|chasing\s*cars|yellow|hallelujah|night\s*changes/.test(s)) return rnd(2,3);
-  if (/golden\s*hour|heat\s*waves|electric\s*love|watermelon\s*sugar|peaches|sunflower|lovely|lover|die\s*for\s*you/.test(s)) return rnd(4,5);
-  if (/chill|lofi|smooth|mellow|float|wave|easy|drift|vibe/.test(s)) return rnd(4,5);
-  if (/blinding\s*lights|industry\s*baby|about\s*damn\s*time|good\s*4\s*u|levitating|starboy|cruel\s*summer|anti.hero|bad\s*guy|unholy/.test(s)) return rnd(8,9);
-  if (/party|dance|club|banger|rave|edm|dubstep|techno|drum.*bass|pump\s*up|get\s*low|jump|bounce|turn\s*up|lit\b/.test(s)) return rnd(8,10);
-  if (/trap|drill|rap|hip\s*hop/.test(s)) return rnd(7,9);
-  if (/r&b|soul|funk|groove/.test(s)) return rnd(5,7);
+  if(/slow\s*danc|ballad|lullaby|unplugged|acoustic|someone\s*like\s*you|let\s*her\s*go|see\s*you\s*again|fix\s*you|skinny\s*love|chasing\s*cars|yellow|hallelujah|night\s*changes/.test(s)) return rnd(2,3);
+  if(/golden\s*hour|heat\s*waves|electric\s*love|watermelon\s*sugar|peaches|sunflower|lovely|lover|die\s*for\s*you/.test(s)) return rnd(4,5);
+  if(/chill|lofi|smooth|mellow|float|wave|easy|drift|vibe/.test(s)) return rnd(4,5);
+  if(/blinding\s*lights|industry\s*baby|about\s*damn\s*time|good\s*4\s*u|levitating|starboy|cruel\s*summer|anti.hero|bad\s*guy|unholy/.test(s)) return rnd(8,9);
+  if(/party|dance|club|banger|rave|edm|dubstep|drum.*bass|pump\s*up|bounce|turn\s*up/.test(s)) return rnd(8,10);
+  if(/trap|drill|rap|hip\s*hop/.test(s)) return rnd(7,9);
   return rnd(5,8);
 }
-const eColor = e=>e>=9?'#ff2d87':e>=7?'#ff8c00':e>=5?'#00f5ff':e>=3?'#8b5cf6':'#4a9eff';
-const eLabel = e=>e>=9?'ABSOLUTE BANGER':e>=7?'HIGH ENERGY':e>=5?'VIBING':e>=3?'CHILL MODE':'SLOW DANCE';
+const eColor=e=>e>=9?'#ff2d87':e>=7?'#ff8c00':e>=5?'#00f5ff':e>=3?'#8b5cf6':'#4a9eff';
+const eLabel=e=>e>=9?'ABSOLUTE BANGER':e>=7?'HIGH ENERGY':e>=5?'VIBING':e>=3?'CHILL MODE':'SLOW DANCE';
 
-// ══════════════════════════════════════════════════════════
-//  QUEUE
-// ══════════════════════════════════════════════════════════
-function buildQ(energy, n=8) {
-  const excl = new Set([S.current?.id, S.preloadTrack?.id, ...S.played.slice(-10),
-    ...S.queue.filter(q=>q._manual).map(q=>q.id)]);
-  const pool = S.tracks.filter(t=>!excl.has(t.id));
-  const sorted = pool
-    .map(t=>({...t,_sc:Math.abs(t.energy-energy)+Math.random()*1.6}))
-    .sort((a,b)=>a._sc-b._sc).slice(0,n);
-  const manual = S.queue.filter(q=>q._manual);
-  S.queue = [...manual, ...sorted.filter(s=>!manual.find(m=>m.id===s.id))].slice(0,n);
+function calcWin(track,dur){
+  const e=track.energy,d=dur||210;
+  let pd;
+  if(S.cutMode==='hype') pd=e>=9?rnd(30,55):e>=7?rnd(45,70):e>=5?rnd(55,80):rnd(65,90);
+  else if(S.cutMode==='dj') pd=e>=9?rnd(55,85):e>=7?rnd(70,100):e>=5?rnd(85,115):rnd(100,135);
+  else pd=e>=9?rnd(100,145):e>=7?rnd(120,165):e>=5?rnd(140,185):rnd(155,200);
+  let si=e>=9?rnd(18,32):e>=7?rnd(12,24):e>=5?rnd(8,18):e>=3?rnd(4,12):rnd(2,8);
+  if(S.cutMode==='chill') si=Math.floor(si*.5);
+  const start=Math.min(si,d*.38);
+  const end=Math.max(Math.min(start+pd,d-4),start+20);
+  return{startAt:Math.floor(start),endAt:Math.floor(end)};
 }
 
-// ══════════════════════════════════════════════════════════
-//  PRE-LOADING
-// ══════════════════════════════════════════════════════════
-function preloadNext() {
-  if (S.preloaded || S.inTransition) return;
-  if (!S.queue.length) buildQ(S.energy);
-  const next = S.queue[0];
-  if (!next) return;
-
-  // We don't know the song's full duration until it's loaded,
-  // so use a generous estimate (210s) — we'll refine in the poll loop
-  const win = calcWindow(next, 210);
-  stagingP().cueVideoById({ videoId:next.id, startSeconds:win.startAt });
-  S.preloadTrack  = next;
-  S.preloadWindow = win;
-  S.preloaded = true;
-
-  document.getElementById('preload-dot').style.background = 'var(--cyan)';
-  document.getElementById('preload-lbl').textContent = 'Loaded: ' + (next.title.slice(0,22));
+// ── QUEUE ─────────────────────────────────────────────────────────
+function buildQ(e,n=8){
+  const ex=new Set([S.current?.id,S.preloadTrack?.id,...S.played.slice(-10),...S.queue.filter(q=>q._manual).map(q=>q.id)]);
+  const pool=S.tracks.filter(t=>!ex.has(t.id));
+  const s=pool.map(t=>({...t,_sc:Math.abs(t.energy-e)+Math.random()*1.6})).sort((a,b)=>a._sc-b._sc).slice(0,n);
+  const m=S.queue.filter(q=>q._manual);
+  S.queue=[...m,...s.filter(x=>!m.find(y=>y.id===x.id))].slice(0,n);
 }
 
-// ══════════════════════════════════════════════════════════
-//  STATE CHANGE HANDLER
-// ══════════════════════════════════════════════════════════
-function onStateChange(e, which) {
-  const isLive = which === S.active;
-  const YTS = YT.PlayerState;
-  if (isLive) {
-    if (e.data===YTS.PLAYING) {
-      S.playing=true;
-      document.getElementById('play-btn').textContent='⏸';
-      syncTrackInfo();
-      setStatus('LIVE','pink');
-    } else if (e.data===YTS.PAUSED) {
-      S.playing=false;
-      document.getElementById('play-btn').textContent='▶';
-      setStatus('PAUSED','dim');
-    } else if (e.data===YTS.ENDED) {
-      if (!S.inTransition) doTransition('auto');
+// ── PRE-LOADING ───────────────────────────────────────────────────
+function preload(){
+  if(S.preloaded||S.inTransition) return;
+  if(!S.queue.length) buildQ(S.energy);
+  const next=S.queue[0];if(!next) return;
+  const win=calcWin(next,210);
+  stagingP().cueVideoById({videoId:next.id,startSeconds:win.startAt});
+  S.preloadTrack=next;S.preloadWindow=win;S.preloaded=true;
+  document.getElementById('preload-dot').style.background='var(--cyan)';
+  document.getElementById('preload-lbl').textContent='Loaded: '+next.title.slice(0,22);
+}
+
+function sc(e,which){
+  const isLive=which===S.active,YTS=YT.PlayerState;
+  if(isLive){
+    if(e.data===YTS.PLAYING){S.playing=true;document.getElementById('play-btn').textContent='⏸';syncInfo();setStatus('LIVE','pink');}
+    else if(e.data===YTS.PAUSED){S.playing=false;document.getElementById('play-btn').textContent='▶';setStatus('PAUSED','dim');}
+    else if(e.data===YTS.ENDED&&!S.inTransition) doTx('auto');
+  } else if(stagingP()&&e.data===YT.PlayerState.PLAYING) stagingP().setVolume(0);
+}
+function err(w){if(w===S.active){log('⚠ Track error — skipping...','info');setTimeout(()=>doTx('auto'),300);}}
+
+function togglePlay(){if(!liveP())return;S.playing?liveP().pauseVideo():liveP().playVideo();}
+function setVol(v){S.volume=parseInt(v);document.getElementById('vol-num').textContent=S.volume;if(liveP())liveP().setVolume(S.volume);}
+
+function syncInfo(){
+  try{
+    const d=liveP().getVideoData();if(!d?.video_id)return;
+    const id=d.video_id;
+    let t=S.tracks.find(x=>x.id===id);
+    if(!t){t={id,title:d.title||'Now Playing',artist:d.author||'YouTube',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:estE(d.title||'',d.author||'')};S.tracks.push(t);}
+    else{if(d.title)t.title=d.title;if(d.author)t.artist=d.author;}
+    if(S.current?.id!==id){
+      S.current=t;S.outroVotes=0;S.outroTriggered=false;S.rmsHistory=[];
+      const dur=liveP().getDuration()||210;
+      const win=calcWin(t,dur);
+      S.currentWindow=win;liveP().seekTo(win.startAt,true);
+      S.played.push(id);S.queue=S.queue.filter(q=>q.id!==id);
+      if(S.queue.length<3)buildQ(S.energy);
+      updateNP();renderQ();updateWinUI(win,dur);
     }
-  } else {
-    const stg = stagingP();
-    if (stg && e.data===YTS.PLAYING) stg.setVolume(0);
-  }
+  }catch{}
 }
 
-function onPlayerError(which) {
-  if (which===S.active) { log('⚠ Track error — skipping...','info'); setTimeout(()=>doTransition('auto'),300); }
-}
-
-// ══════════════════════════════════════════════════════════
-//  PLAYBACK CONTROLS
-// ══════════════════════════════════════════════════════════
-function togglePlay() { if (!liveP()) return; S.playing ? liveP().pauseVideo() : liveP().playVideo(); }
-function setVol(v) { S.volume=parseInt(v); document.getElementById('vol-num').textContent=S.volume; if (liveP()) liveP().setVolume(S.volume); }
-
-function syncTrackInfo() {
-  try {
-    const d = liveP().getVideoData();
-    if (!d?.video_id) return;
-    const id = d.video_id;
-    let t = S.tracks.find(x=>x.id===id);
-    if (!t) {
-      t={id,title:d.title||'Now Playing',artist:d.author||'YouTube',
-        thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:estimateEnergy(d.title||'',d.author||'')};
-      S.tracks.push(t);
-    } else { if(d.title)t.title=d.title; if(d.author)t.artist=d.author; }
-
-    if (S.current?.id !== id) {
-      S.current = t;
-      // Now we have a real duration from the player — recalculate window
-      const dur = liveP().getDuration() || 210;
-      const win = calcWindow(t, dur);
-      S.currentWindow = win;
-      // Seek to the calculated start point
-      liveP().seekTo(win.startAt, true);
-      S.played.push(id);
-      S.queue = S.queue.filter(q=>q.id!==id);
-      if (S.queue.length<3) buildQ(S.energy);
-      updateNowPlaying();
-      renderQ();
-      updateWindowUI(win, dur);
-    }
-  } catch {}
-}
-
-// ══════════════════════════════════════════════════════════
-//  POLLING — progress + hype-window end trigger
-// ══════════════════════════════════════════════════════════
-function startPoll() {
+function startPoll(){
   clearInterval(S.pollTimer);
-  S.pollTimer = setInterval(() => {
-    if (!liveP() || !S.playing) return;
-    try {
-      const cur = liveP().getCurrentTime() || 0;
-      const dur = liveP().getDuration() || 1;
-      const win = S.currentWindow || { startAt:0, endAt:dur };
-
-      // Progress bar — relative to hype window
-      const winLen = win.endAt - win.startAt;
-      const pct = Math.max(0, Math.min(100, ((cur - win.startAt) / winLen) * 100));
-      document.getElementById('prog').style.width = pct + '%';
-      document.getElementById('t-cur').textContent = fmt(cur);
-      document.getElementById('t-end').textContent = fmt(win.endAt);
-
-      // Hype-window playhead indicator
-      updateHypeHead(cur, win, dur);
-
-      // Refine preload window once we know full duration
-      if (S.preloaded && S.preloadWindow && dur > 30) {
-        // Don't refine again if already refined
-      }
-
-      // Pre-load next: when we're 30s (or 40%) from the end of our window
-      const remInWindow = win.endAt - cur;
-      if (remInWindow < 32 && !S.preloaded && !S.inTransition) preloadNext();
-
-      // Trigger transition: 9s before our window's endAt
-      const txLeadin = S.cutMode === 'hype' ? 6 : S.cutMode === 'dj' ? 8 : 10;
-      if (remInWindow < txLeadin && remInWindow > 0 && !S.txPending && !S.inTransition && S.preloaded) {
-        S.txPending = true;
-        doTransition('auto');
-      }
-
-      // Hard guard: if somehow we went past endAt
-      if (cur >= win.endAt + 2 && !S.inTransition) {
-        S.txPending = true;
-        doTransition('auto');
-      }
-    } catch {}
-  }, 700);
+  S.pollTimer=setInterval(()=>{
+    if(!liveP()||!S.playing)return;
+    try{
+      const cur=liveP().getCurrentTime()||0,dur=liveP().getDuration()||1;
+      const win=S.currentWindow||{startAt:0,endAt:dur};
+      const wl=win.endAt-win.startAt,pct=Math.max(0,Math.min(100,((cur-win.startAt)/wl)*100));
+      document.getElementById('prog').style.width=pct+'%';
+      document.getElementById('t-cur').textContent=fmt(cur);
+      document.getElementById('t-end').textContent=fmt(win.endAt);
+      const hp=Math.max(0,Math.min(100,(cur/dur)*100));
+      document.getElementById('hype-head').style.left=hp+'%';
+      const rem=win.endAt-cur;
+      if(rem<32&&!S.preloaded&&!S.inTransition)preload();
+      const tl=S.cutMode==='hype'?6:S.cutMode==='dj'?8:10;
+      if(rem<tl&&rem>0&&!S.txPending&&!S.inTransition&&S.preloaded){S.txPending=true;doTx('auto');}
+      if(cur>=win.endAt+2&&!S.inTransition){S.txPending=true;doTx('auto');}
+    }catch{}
+  },700);
 }
 
-function updateWindowUI(win, totalDur) {
-  const d = totalDur || 210;
-  document.getElementById('window-info').textContent = `window: ${fmt(win.startAt)} → ${fmt(win.endAt)}`;
-  const startPct = (win.startAt / d) * 100;
-  const widthPct = ((win.endAt - win.startAt) / d) * 100;
-  document.getElementById('hype-range').style.left  = startPct + '%';
-  document.getElementById('hype-range').style.width = widthPct + '%';
-  document.getElementById('t-window').textContent = `${fmt(win.endAt - win.startAt)} window`;
+function updateWinUI(win,dur){
+  const d=dur||210;
+  document.getElementById('hype-range').style.left=(win.startAt/d)*100+'%';
+  document.getElementById('hype-range').style.width=((win.endAt-win.startAt)/d)*100+'%';
+  document.getElementById('t-window').textContent=fmt(win.endAt-win.startAt)+' window';
 }
 
-function updateHypeHead(cur, win, totalDur) {
-  const pct = Math.max(0, Math.min(100, (cur / totalDur) * 100));
-  document.getElementById('hype-head').style.left = pct + '%';
-}
-
-// ══════════════════════════════════════════════════════════
-//  ★  TRANSITION ENGINE  ★
-// ══════════════════════════════════════════════════════════
-async function doTransition(mode) {
-  if (S.inTransition) return;
-  S.inTransition = true;
-  S.txPending = false;
-
-  if (!S.preloaded) { preloadNext(); await sleep(1200); }
-  if (!S.preloadTrack) { S.inTransition=false; return; }
-
-  const fadeOut = liveP();
-  const fadeIn  = stagingP();
-  const txDur   = mode==='skip' ? 4500 : (S.cutMode==='hype' ? 5500 : 7500);
-
+// ── ★ TRANSITION ENGINE ★ ──────────────────────────────────────
+async function doTx(mode){
+  if(S.inTransition)return;
+  S.inTransition=true;S.txPending=false;
+  if(!S.preloaded){preload();await sl(1000);}
+  if(!S.preloadTrack){S.inTransition=false;return;}
+  const fo=liveP(),fi=stagingP();
+  const dur=mode==='skip'?4000:S.cutMode==='hype'?5000:7000;
   setStatus('MIXING','pink');
-  showTxBadge(mode==='skip'?'⚡ INSTANT MIX':'↪ SMART CUT','var(--pink)', txDur);
-  document.getElementById('stage-pulse').className = 'ring-anim';
-
-  // Start incoming (muted)
-  const win = S.preloadWindow || { startAt:0, endAt:210 };
-  fadeIn.setVolume(0);
-  fadeIn.seekTo(win.startAt, true);
-  await sleep(250);
-  fadeIn.playVideo();
-  await sleep(350);
-
-  if (S.txStyle==='pump')   await txPump(fadeOut, fadeIn, txDur);
-  else if (S.txStyle==='smooth') await txSmooth(fadeOut, fadeIn, txDur);
-  else                           await txCut(fadeOut, fadeIn);
-
-  fadeOut.pauseVideo();
-  fadeOut.setVolume(0);
-  fadeIn.setVolume(S.volume);
-  swapActive();
-
-  const next = S.preloadTrack;
-  S.current       = next;
-  S.currentWindow = S.preloadWindow;
-  S.played.push(next.id);
-  S.queue = S.queue.filter(q=>q.id!==next.id);
-  S.preloaded = false;
-  S.preloadTrack  = null;
-  S.preloadWindow = null;
-
-  // Refine window now that we have actual duration from the player
-  try {
-    const realDur = fadeIn.getDuration() || 210;
-    const refinedWin = calcWindow(next, realDur);
-    S.currentWindow = refinedWin;
-    updateWindowUI(refinedWin, realDur);
-    // If we seeked too early, seek forward
-    const nowAt = fadeIn.getCurrentTime() || 0;
-    if (nowAt < refinedWin.startAt) fadeIn.seekTo(refinedWin.startAt, true);
-  } catch {}
-
-  updateNowPlaying();
-  buildQ(S.energy);
-  renderQ();
-
+  showTxBadge(mode==='skip'?'⚡ INSTANT MIX':mode==='outro'?'🎚 OUTRO CUT':'↪ BEAT-SYNCED CUT','var(--pink)',dur);
+  document.getElementById('stage-pulse').className='ring-anim';
+  // Beat-sync: wait for next beat before starting crossfade (not on urgent modes)
+  if(S.audioReady&&mode!=='skip'&&mode!=='outro') await waitBeat(1800);
+  const win=S.preloadWindow||{startAt:0,endAt:210};
+  fi.setVolume(0);fi.seekTo(win.startAt,true);await sl(200);fi.playVideo();await sl(280);
+  if(S.txStyle==='pump') await pumpTx(fo,fi,dur);
+  else if(S.txStyle==='smooth') await smoothTx(fo,fi,dur);
+  else await cutTx(fo,fi);
+  fo.pauseVideo();fo.setVolume(0);fi.setVolume(S.volume);swapActive();
+  const next=S.preloadTrack;
+  S.current=next;S.currentWindow=S.preloadWindow;S.outroVotes=0;S.outroTriggered=false;S.rmsHistory=[];
+  S.played.push(next.id);S.queue=S.queue.filter(q=>q.id!==next.id);
+  S.preloaded=false;S.preloadTrack=null;S.preloadWindow=null;
+  try{const rd=fi.getDuration()||210;const rw=calcWin(next,rd);S.currentWindow=rw;updateWinUI(rw,rd);const na=fi.getCurrentTime()||0;if(na<rw.startAt)fi.seekTo(rw.startAt,true);}catch{}
+  updateNP();buildQ(S.energy);renderQ();
   document.getElementById('stage-pulse').className='';
   document.getElementById('preload-dot').style.background='rgba(255,255,255,.2)';
   document.getElementById('preload-lbl').textContent='Next: idle';
-  setStatus('LIVE','pink');
-  S.inTransition=false;
-  S.txPending=false;
-
-  const line = CANNED.transition[Math.floor(Math.random()*CANNED.transition.length)];
-  log(line,'transition');
-  if (S.anthropicKey) callDJ(`Mixed into "${next.title}" by ${next.artist}. Energy ${next.energy}/10. DJ is cutting only the best part. Short transition line.`,'transition');
-
-  if (S.queue.length<3) buildQ(S.energy);
-  setTimeout(preloadNext, 2500);
+  setStatus('LIVE','pink');S.inTransition=false;S.txPending=false;
+  const bpmTag=S.estimatedBPM?` @ ${S.estimatedBPM}BPM`:'';
+  log(CANNED.transition[rndI(CANNED.transition.length)]+(S.audioReady?` (beat-synced${bpmTag})`:' (heuristic)'),'transition');
+  if(S.anthropicKey)callDJ(`Mixed into "${next.title}" by ${next.artist}. Energy ${next.energy}/10${S.estimatedBPM?' at '+S.estimatedBPM+'BPM':''}. Short DJ line.`,'transition');
+  if(S.queue.length<3)buildQ(S.energy);
+  setTimeout(preload,2500);
 }
 
-// ── Beat Pump ────────────────────────────────────────────
-async function txPump(fadeOut, fadeIn, durationMs) {
-  const BPM=128, BEAT=60000/BPM, HOLD=BEAT*.48, DIP=BEAT*.22, RISE=BEAT*.30;
-  const total = Math.ceil(durationMs/BEAT);
-  for(let i=0;i<2;i++){fadeIn.setVolume(Math.round(S.volume*.08*(i+1)));await sleep(BEAT);}
-  const pump=total-4;
-  for(let i=0;i<pump;i++){
-    const p=i/pump;
-    const outBase=S.volume*Math.max(0,1-p*1.1);
-    const inVol=Math.round(S.volume*Math.min(1,0.16+p*0.9));
-    fadeIn.setVolume(inVol); fadeOut.setVolume(Math.round(outBase)); await sleep(HOLD);
-    if(outBase>4){fadeOut.setVolume(Math.round(outBase*.08));await sleep(DIP);fadeOut.setVolume(Math.round(outBase*.52));await sleep(RISE);}
-    else await sleep(DIP+RISE);
+async function pumpTx(fo,fi,dur){
+  const BPM=S.estimatedBPM&&S.estimatedBPM>60&&S.estimatedBPM<200?S.estimatedBPM:128;
+  const BEAT=60000/BPM,HOLD=BEAT*.48,DIP=BEAT*.22,RISE=BEAT*.30;
+  const total=Math.ceil(dur/BEAT);
+  for(let i=0;i<2;i++){fi.setVolume(Math.round(S.volume*.08*(i+1)));await sl(BEAT);}
+  const p=total-4;
+  for(let i=0;i<p;i++){
+    const t=i/p,ob=S.volume*Math.max(0,1-t*1.1),iv=Math.round(S.volume*Math.min(1,.16+t*.9));
+    fi.setVolume(iv);fo.setVolume(Math.round(ob));await sl(HOLD);
+    if(ob>4){fo.setVolume(Math.round(ob*.08));await sl(DIP);fo.setVolume(Math.round(ob*.52));await sl(RISE);}
+    else await sl(DIP+RISE);
   }
-  fadeOut.setVolume(0);
-  for(let i=0;i<4;i++){fadeIn.setVolume(Math.round(S.volume*(.88+.12*(i/4))));await sleep(BEAT*.5);}
+  fo.setVolume(0);for(let i=0;i<4;i++){fi.setVolume(Math.round(S.volume*(.88+.12*(i/4))));await sl(BEAT*.5);}
+}
+async function smoothTx(fo,fi,dur){
+  const N=24,dt=dur/N;
+  for(let i=0;i<=N;i++){fo.setVolume(Math.round(S.volume*(1-i/N)));fi.setVolume(Math.round(S.volume*(i/N)));await sl(dt);}
+}
+async function cutTx(fo,fi){
+  const N=10,dt=50;for(let i=1;i<=N;i++){fo.setVolume(Math.round(S.volume*(1-i/N)));await sl(dt);}
+  fi.setVolume(S.volume);
 }
 
-// ── Smooth Crossfade ─────────────────────────────────────
-async function txSmooth(fadeOut, fadeIn, durationMs) {
-  const STEPS=24, dt=durationMs/STEPS;
-  for(let i=0;i<=STEPS;i++){
-    fadeOut.setVolume(Math.round(S.volume*(1-i/STEPS)));
-    fadeIn.setVolume(Math.round(S.volume*(i/STEPS)));
-    await sleep(dt);
-  }
-}
-
-// ── Hard Cut ─────────────────────────────────────────────
-async function txCut(fadeOut, fadeIn) {
-  await rampVol(fadeOut, S.volume, 0, 600);
-  fadeIn.setVolume(S.volume);
-}
-
-// ══════════════════════════════════════════════════════════
-//  VIBE + SKIP + REQUEST
-// ══════════════════════════════════════════════════════════
-async function changeEnergy(newE) {
-  const e=Math.max(1,Math.min(10,Math.round(newE)));
-  S.energy=e;
-  if(S.preloaded){ S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null; }
-  buildQ(e); renderQ(); updateEnergyUI();
+// ── CONTROLS ──────────────────────────────────────────────────────
+async function changeEnergy(e2){
+  const e=Math.max(1,Math.min(10,Math.round(e2)));S.energy=e;
+  if(S.preloaded){S.preloaded=false;S.preloadTrack=null;S.preloadWindow=null;}
+  buildQ(e);renderQ();updateEUI();
   const type=e>=7?'hype':'chill';
-  log(CANNED[type][Math.floor(Math.random()*CANNED[type].length)],type);
-  if(S.anthropicKey) callDJ(`Energy change to ${e}/10. Current: "${S.current?.title||'track'}". ${e>=7?'RAMP UP':'Chill out'}. 2-sentence DJ line.`,type);
-  await sleep(400);
-  preloadNext();
+  log(CANNED[type][rndI(CANNED[type].length)],type);
+  if(S.anthropicKey)callDJ(`Energy to ${e}/10. ${e>=7?'Ramp up':'Chill down'}. Song: "${S.current?.title||'track'}". 2 sentences.`,type);
+  await sl(400);preload();
 }
-
-async function handleSkip() {
+async function handleSkip(){
   const btn=document.getElementById('skip-btn');
-  if(S.inTransition) return;
+  if(S.inTransition)return;
   btn.disabled=true;
-  log(CANNED.skip[Math.floor(Math.random()*CANNED.skip.length)],'skip');
-  if(S.anthropicKey) callDJ('Emergency skip to next track. Short hype line.','skip');
-  if(!S.preloaded){ preloadNext(); await sleep(800); }
-  await doTransition('skip');
-  setTimeout(()=>{ btn.disabled=false; },2000);
+  log(CANNED.skip[rndI(CANNED.skip.length)],'skip');
+  if(S.anthropicKey)callDJ('Emergency skip! Short hype line.','skip');
+  if(!S.preloaded){preload();await sl(800);}
+  await doTx('skip');
+  setTimeout(()=>btn.disabled=false,2000);
 }
-
-async function handleRequest() {
-  const val=document.getElementById('req-inp').value.trim();
-  if(!val) return;
+async function handleRequest(){
+  const val=document.getElementById('req-inp').value.trim();if(!val)return;
   document.getElementById('req-inp').value='';
-  const id=extractId(val);
-  if(!id){ showToast('Paste a full YouTube video URL'); return; }
-  await fetchOEmbed(id);
+  const id=extId(val);if(!id){showToast('Paste a full YouTube video URL');return;}
+  await fetchOE(id);
   const t=S.tracks.find(x=>x.id===id)||{id,title:'Requested Track',artist:'YouTube',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`,energy:S.energy};
-  t._manual=true;
-  S.queue.unshift(t);
-  S.queue=S.queue.slice(0,8);
-  S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null;
-  preloadNext();
-  renderQ();
-  log(CANNED.request[Math.floor(Math.random()*CANNED.request.length)]+` "${t.title}" — pre-loading!`,'request');
-  if(S.anthropicKey) callDJ(`Request for "${t.title}" bumped up and pre-loading. Short hype line.`,'request');
+  t._manual=true;S.queue.unshift(t);S.queue=S.queue.slice(0,8);
+  S.preloaded=false;S.preloadTrack=null;S.preloadWindow=null;preload();renderQ();
+  log(CANNED.request[rndI(CANNED.request.length)]+` "${t.title}" — pre-loading!`,'request');
+  if(S.anthropicKey)callDJ(`Request: "${t.title}" bumped up. Short hype line.`,'request');
 }
-
-async function addSong() {
-  const val=document.getElementById('add-inp').value.trim();
-  if(!val) return;
+async function addSong(){
+  const val=document.getElementById('add-inp').value.trim();if(!val)return;
   document.getElementById('add-inp').value='';
-  const id=extractId(val);
-  if(!id){ showToast('Paste a full YouTube video URL'); return; }
-  await fetchOEmbed(id);
-  const t=S.tracks.find(x=>x.id===id);
-  if(t){ t._manual=true; S.queue.unshift(t); S.queue=S.queue.slice(0,8); renderQ(); showToast('Added: '+t.title); }
+  const id=extId(val);if(!id){showToast('Paste a full YouTube video URL');return;}
+  await fetchOE(id);const t=S.tracks.find(x=>x.id===id);
+  if(t){t._manual=true;S.queue.unshift(t);S.queue=S.queue.slice(0,8);renderQ();showToast('Added: '+t.title);}
 }
 
-// ══════════════════════════════════════════════════════════
-//  CUT MODE + TX STYLE
-// ══════════════════════════════════════════════════════════
-function setCutMode(m) {
-  S.cutMode=m;
-  updateCutBadge();
-  updateCutUI();
-  // Force re-preload with new window calculations
-  if(S.preloaded){ S.preloaded=false; S.preloadTrack=null; S.preloadWindow=null; setTimeout(preloadNext,300); }
-}
-function setTxStyle(s) { S.txStyle=s; updateTxStyleUI(); }
-
-function updateCutBadge() {
-  const labels={chill:'CHILL MODE',dj:'DJ MODE',hype:'HYPE BEAST'};
-  document.getElementById('cut-badge').textContent = labels[S.cutMode]||'DJ MODE';
-}
-function updateCutUI() {
-  const active={chill:'rgba(0,245,255,.15)',dj:'rgba(255,45,135,.2)',hype:'rgba(255,140,0,.18)'};
-  const abord={chill:'rgba(0,245,255,.45)',dj:'rgba(255,45,135,.5)',hype:'rgba(255,140,0,.45)'};
-  const acol={chill:'var(--cyan)',dj:'var(--pink)',hype:'var(--orange)'};
+// ── STYLE TOGGLES ────────────────────────────────────────────────
+function setCut(m){S.cutMode=m;updateCutBadge();updateCutUI();if(S.preloaded){S.preloaded=false;S.preloadTrack=null;S.preloadWindow=null;setTimeout(preload,300);}}
+function setTx(s){S.txStyle=s;updateTxUI();}
+function updateCutBadge(){document.getElementById('cut-badge').textContent={chill:'CHILL MODE',dj:'DJ MODE',hype:'HYPE BEAST'}[S.cutMode]||'DJ MODE';}
+function updateCutUI(){
+  const ac={chill:'rgba(0,245,255,.15)',dj:'rgba(255,45,135,.2)',hype:'rgba(255,140,0,.18)'};
+  const ab={chill:'rgba(0,245,255,.45)',dj:'rgba(255,45,135,.5)',hype:'rgba(255,140,0,.45)'};
+  const al={chill:'var(--cyan)',dj:'var(--pink)',hype:'var(--orange)'};
   ['chill','dj','hype'].forEach(m=>{
-    const btn=document.getElementById('cm-'+m);
-    if(!btn) return;
-    if(m===S.cutMode){
-      btn.style.background=active[m]; btn.style.borderColor=abord[m]; btn.style.color=acol[m];
-    } else {
-      btn.style.background='rgba(0,245,255,.08)'; btn.style.borderColor='rgba(0,245,255,.28)'; btn.style.color='var(--cyan)';
-    }
+    const b=document.getElementById('cm-'+m);if(!b)return;
+    if(m===S.cutMode){b.style.background=ac[m];b.style.borderColor=ab[m];b.style.color=al[m];}
+    else{b.style.background='rgba(0,245,255,.08)';b.style.borderColor='rgba(0,245,255,.28)';b.style.color='var(--cyan)';}
   });
 }
-function updateTxStyleUI() {
+function updateTxUI(){
   const ac={pump:'rgba(255,45,135,.2)',smooth:'rgba(0,245,255,.15)',cut:'rgba(255,140,0,.15)'};
   const ab={pump:'rgba(255,45,135,.5)',smooth:'rgba(0,245,255,.45)',cut:'rgba(255,140,0,.45)'};
-  const acl={pump:'var(--pink)',smooth:'var(--cyan)',cut:'var(--orange)'};
+  const al={pump:'var(--pink)',smooth:'var(--cyan)',cut:'var(--orange)'};
   ['pump','smooth','cut'].forEach(s=>{
-    const btn=document.getElementById('ts-'+s);
-    if(!btn) return;
-    if(s===S.txStyle){
-      btn.style.background=ac[s]; btn.style.borderColor=ab[s]; btn.style.color=acl[s];
-    } else {
-      btn.style.background='rgba(0,245,255,.08)'; btn.style.borderColor='rgba(0,245,255,.28)'; btn.style.color='var(--cyan)';
-    }
+    const b=document.getElementById('ts-'+s);if(!b)return;
+    if(s===S.txStyle){b.style.background=ac[s];b.style.borderColor=ab[s];b.style.color=al[s];}
+    else{b.style.background='rgba(0,245,255,.08)';b.style.borderColor='rgba(0,245,255,.28)';b.style.color='var(--cyan)';}
   });
 }
 
-// ══════════════════════════════════════════════════════════
-//  VISUALIZER
-// ══════════════════════════════════════════════════════════
-function buildViz() {
-  document.getElementById('viz').innerHTML=Array(26).fill(0).map((_,i)=>`<div class="vbar" id="vb${i}" style="height:8%"></div>`).join('');
-  clearInterval(S.vizTimer);
-  S.vizTimer=setInterval(()=>{
-    for(let i=0;i<26;i++){
-      const el=document.getElementById('vb'+i);
-      if(!el) continue;
-      if(!S.playing){const h=parseFloat(el.style.height);el.style.height=Math.max(4,h*.91)+'%';continue;}
-      const base=15+S.energy*4.5;
-      const wave=Math.sin(Date.now()/170+i*.74)*S.energy*2.6;
-      const rand=(Math.random()-.5)*S.energy*6;
-      el.style.height=Math.max(5,Math.min(94,base+wave+rand))+'%';
-    }
-  },80);
-}
-
-// ══════════════════════════════════════════════════════════
-//  AI DJ
-// ══════════════════════════════════════════════════════════
+// ── AI DJ ────────────────────────────────────────────────────────
 const CANNED={
-  hype:     ["LET'S GO — energy RISING!","DROPPING the heat right now!","🔥 Feel that — vibes are MAXED!"],
-  chill:    ["Easing it down... feel that.","Smooth shift — breathe it in.","Slowing the tempo now."],
-  transition:["Clean cut — next track in!","MIXING IN — watch this.","Seamless drop — you felt that!"],
-  skip:     ["CUTTING NOW — new vibe!","Emergency mix — here we GO!","Fast cut — next up in seconds!"],
-  request:  ["Request LOCKED IN —","Bumping to front:","Your song — jumping the queue:"],
+  hype:["LET'S GO — energy RISING!","DROPPING the heat — feel that!","🔥 Vibes MAXED!"],
+  chill:["Easing it down... vibe shift.","Smooth drop in tempo — feel it.","Slowing down, stay with me."],
+  transition:["Beat-synced cut — clean!","MIXING on the drop!","Seamless — you felt that!"],
+  skip:["CUTTING NOW — new vibe!","Emergency mix — here we GO!","Fast cut incoming!"],
+  request:["Request LOCKED IN —","Bumping to front:","Your song — jumping queue:"],
 };
-
-async function callDJ(prompt,type) {
-  document.getElementById('ai-dot').style.display='block';
-  document.getElementById('ai-lbl').style.display='inline';
-  try {
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
+async function callDJ(prompt,type){
+  document.getElementById('ai-dot').style.display='block';document.getElementById('ai-lbl').style.display='inline';
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':S.anthropicKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:"You are a smart AI DJ. Max 2 punchy sentences. DJ slang: drops, crossfades, vibes. Open with: DROPPING..., MIXING..., LET'S GO..., FEEL THAT... Never break character.",
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    const d=await res.json();
-    const text=d.content?.[0]?.text;
-    if(text) log(text,type);
-  } catch { log(CANNED[type]?.[0]||'Vibes are electric!',type); }
-  document.getElementById('ai-dot').style.display='none';
-  document.getElementById('ai-lbl').style.display='none';
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
+        system:"AI DJ. Max 2 punchy sentences. DJ slang, BPM talk. Open with: DROPPING..., MIXING..., LET'S GO..., FEEL THAT... Never break character.",
+        messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();const text=d.content?.[0]?.text;if(text)log(text,type);
+  }catch{log(CANNED[type]?.[0]||'Vibes electric!',type);}
+  document.getElementById('ai-dot').style.display='none';document.getElementById('ai-lbl').style.display='none';
 }
 
-// ══════════════════════════════════════════════════════════
-//  UI HELPERS
-// ══════════════════════════════════════════════════════════
+// ── UI ────────────────────────────────────────────────────────────
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active');}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
-
 function setStatus(label,color){
-  const pill=document.getElementById('status-pill');
-  const dot=pill.querySelector('.pill-dot'), span=pill.querySelector('span');
+  const pill=document.getElementById('status-pill'),dot=pill.querySelector('.pill-dot'),span=pill.querySelector('span');
   span.textContent=label;
   const c=color==='pink'?'var(--pink)':color==='cyan'?'var(--cyan)':'rgba(255,255,255,.3)';
   const bg=color==='pink'?'rgba(255,45,135,.1)':color==='cyan'?'rgba(0,245,255,.1)':'rgba(255,255,255,.05)';
   const bc=color==='pink'?'rgba(255,45,135,.3)':color==='cyan'?'rgba(0,245,255,.25)':'rgba(255,255,255,.1)';
-  pill.style.background=bg; pill.style.border=`1px solid ${bc}`; pill.style.color=c; dot.style.background=c;
+  pill.style.background=bg;pill.style.border=`1px solid ${bc}`;pill.style.color=c;dot.style.background=c;
 }
-
-function showTxBadge(text,color,durationMs){
-  const badge=document.getElementById('tx-badge'), txt=document.getElementById('tx-badge-txt');
-  const fill=document.getElementById('tx-fill');
-  badge.style.display='block'; txt.textContent=text;
-  txt.style.background=color+'22'; txt.style.border=`1px solid ${color}55`; txt.style.color=color;
-  fill.style.background=color; fill.style.width='0%'; fill.style.transition=`width ${durationMs}ms linear`;
+function showTxBadge(text,color,dur){
+  const badge=document.getElementById('tx-badge'),txt=document.getElementById('tx-badge-txt'),fill=document.getElementById('tx-fill');
+  badge.style.display='block';txt.textContent=text;
+  txt.style.background=color+'22';txt.style.border=`1px solid ${color}55`;txt.style.color=color;
+  fill.style.background=color;fill.style.width='0%';fill.style.transition=`width ${dur}ms linear`;
   setTimeout(()=>fill.style.width='100%',50);
-  clearInterval(S.txTimer);
-  S.txTimer=setTimeout(()=>{ badge.style.display='none'; },durationMs+200);
+  clearInterval(S.txTimer);S.txTimer=setTimeout(()=>badge.style.display='none',dur+200);
 }
-
-function updateNowPlaying(){
-  if(!S.current) return;
+function updateNP(){
+  if(!S.current)return;
   const ec=eColor(S.current.energy);
   document.getElementById('tr-title').textContent=S.current.title;
   document.getElementById('tr-artist').textContent=S.current.artist;
@@ -993,8 +790,7 @@ function updateNowPlaying(){
   document.getElementById('prog').style.background=ec;
   document.getElementById('prog').style.boxShadow=`0 0 8px ${ec}`;
 }
-
-function updateEnergyUI(){
+function updateEUI(){
   const ec=eColor(S.energy);
   document.getElementById('e-num').textContent=S.energy;
   document.getElementById('e-num').style.color=ec;
@@ -1004,50 +800,43 @@ function updateEnergyUI(){
   document.getElementById('e-bar').style.background=`linear-gradient(to right,var(--purple),${ec})`;
   document.getElementById('e-bar').style.boxShadow=`0 0 10px ${ec}`;
 }
-
 function renderQ(){
   const el=document.getElementById('q-list');
   if(!S.queue.length){el.innerHTML='<div style="font-size:10px;color:rgba(255,255,255,.22);padding:6px 0">Building queue...</div>';return;}
   el.innerHTML=S.queue.slice(0,7).map((t,i)=>{
-    const ec=eColor(t.energy);
-    const isNext=S.preloadTrack?.id===t.id;
-    const win=isNext&&S.preloadWindow?` · ${fmt(S.preloadWindow.startAt)}→${fmt(S.preloadWindow.endAt)}`:'';
-    return `<div class="qitem" style="${isNext?'border-color:'+ec+'44;background:'+ec+'09':''}">
+    const ec=eColor(t.energy),isN=S.preloadTrack?.id===t.id;
+    const win=isN&&S.preloadWindow?` · ${fmt(S.preloadWindow.startAt)}→${fmt(S.preloadWindow.endAt)}`:'';
+    return `<div class="qitem" style="${isN?'border-color:'+ec+'44;background:'+ec+'09':''}">
       <div style="font-size:8px;color:rgba(255,255,255,.22);min-width:12px">${i+1}</div>
       ${t.thumb?`<img src="${t.thumb}" style="width:28px;height:21px;object-fit:cover;border-radius:3px;flex-shrink:0">`:''}
       <div style="flex:1;min-width:0">
         <div style="font-size:10px;color:var(--t);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.title}</div>
-        <div style="font-size:8px;color:rgba(255,255,255,.3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.artist}${isNext?` <span style="color:${ec}">· LOADED${win}</span>`:''}</div>
+        <div style="font-size:8px;color:rgba(255,255,255,.3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.artist}${isN?` <span style="color:${ec}">· LOADED${win}</span>`:''}</div>
       </div>
       <div class="edot" style="background:${ec}18;border:1px solid ${ec}44;color:${ec}">${t.energy}</div>
     </div>`;
   }).join('');
 }
-
 function toggleAdd(){S.addVisible=!S.addVisible;document.getElementById('add-panel').style.display=S.addVisible?'block':'none';}
-
 function log(text,type='info'){
   const bg=type==='hype'?'rgba(255,45,135,.09)':type==='skip'?'rgba(255,45,135,.14)':type==='request'?'rgba(0,245,255,.08)':type==='chill'?'rgba(139,92,246,.08)':type==='transition'?'rgba(255,140,0,.07)':'rgba(255,255,255,.03)';
   const bc=(type==='hype'||type==='skip')?'#ff2d87':type==='request'?'#00f5ff':type==='chill'?'#8b5cf6':type==='transition'?'#ffb347':'rgba(255,255,255,.14)';
   const t=new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'});
   const div=document.createElement('div');
-  div.className='msg';
-  div.style.cssText=`background:${bg};border-left:2px solid ${bc};padding:5px 9px;border-radius:5px`;
+  div.className='msg';div.style.cssText=`background:${bg};border-left:2px solid ${bc};padding:5px 9px;border-radius:5px`;
   div.innerHTML=`<span style="font-size:8px;color:rgba(255,255,255,.25);margin-right:8px">${t}</span><span style="font-size:11px">${text}</span>`;
-  const panel=document.getElementById('dj-log');
-  panel.appendChild(div);
-  while(panel.children.length>35) panel.removeChild(panel.firstChild);
+  const panel=document.getElementById('dj-log');panel.appendChild(div);
+  while(panel.children.length>35)panel.removeChild(panel.firstChild);
   div.scrollIntoView({behavior:'smooth'});
 }
 
-// ══════════════════════════════════════════════════════════
-//  UTILS
-// ══════════════════════════════════════════════════════════
-async function rampVol(p,from,to,ms){const steps=10,dt=ms/steps;for(let i=1;i<=steps;i++){p.setVolume(Math.round(from+(to-from)*(i/steps)));await sleep(dt);}}
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+// ── UTILS ─────────────────────────────────────────────────────────
+const sl=ms=>new Promise(r=>setTimeout(r,ms));
 const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
-function extractId(url){const m=url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
+const rndI=n=>Math.floor(Math.random()*n);
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+function extId(url){const m=url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
 </script>
 </body>
 </html>
